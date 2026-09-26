@@ -1,0 +1,321 @@
+{
+  "confusion_matrix": {
+    "normal": {
+      "normal": 8,
+      "sensor_fault": 0,
+      "shared_event": 2
+    },
+    "sensor_fault": {
+      "normal": 0,
+      "sensor_fault": 3,
+      "shared_event": 2
+    },
+    "shared_event": {
+      "normal": 0,
+      "sensor_fault": 1,
+      "shared_event": 4
+    }
+  },
+  "exp_id": "EXP-000",
+  "fault_taxonomy_version": "phase-0.2",
+  "input_mode": "synthetic_fixture",
+  "manifest_status": "complete",
+  "per_class": {
+    "normal": {
+      "f1": 0.888888888888889,
+      "precision": {
+        "ci95_high": 1.0,
+        "ci95_low": 0.675592,
+        "defined": true,
+        "denominator": 8,
+        "numerator": 8,
+        "value": 1.0
+      },
+      "predicted": 8,
+      "recall": {
+        "ci95_high": 0.943318,
+        "ci95_low": 0.490162,
+        "defined": true,
+        "denominator": 10,
+        "numerator": 8,
+        "value": 0.8
+      },
+      "support": 10,
+      "true_positive": 8
+    },
+    "sensor_fault": {
+      "f1": 0.6666666666666665,
+      "precision": {
+        "ci95_high": 0.954413,
+        "ci95_low": 0.300642,
+        "defined": true,
+        "denominator": 4,
+        "numerator": 3,
+        "value": 0.75
+      },
+      "predicted": 4,
+      "recall": {
+        "ci95_high": 0.882379,
+        "ci95_low": 0.230724,
+        "defined": true,
+        "denominator": 5,
+        "numerator": 3,
+        "value": 0.6
+      },
+      "support": 5,
+      "true_positive": 3
+    },
+    "shared_event": {
+      "f1": 0.6153846153846154,
+      "precision": {
+        "ci95_high": 0.784784,
+        "ci95_low": 0.215216,
+        "defined": true,
+        "denominator": 8,
+        "numerator": 4,
+        "value": 0.5
+      },
+      "predicted": 8,
+      "recall": {
+        "ci95_high": 0.963776,
+        "ci95_low": 0.375535,
+        "defined": true,
+        "denominator": 5,
+        "numerator": 4,
+        "value": 0.8
+      },
+      "support": 5,
+      "true_positive": 4
+    }
+  },
+  "per_family": [
+    {
+      "decisions": {
+        "sensor_fault": 1
+      },
+      "family": "DRIFT",
+      "truth_category": "sensor_fault",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "shared_event": 1
+      },
+      "family": "MISSING",
+      "truth_category": "sensor_fault",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "shared_event": 1
+      },
+      "family": "RANGE",
+      "truth_category": "sensor_fault",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "sensor_fault": 1
+      },
+      "family": "SPIKE",
+      "truth_category": "sensor_fault",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "sensor_fault": 1
+      },
+      "family": "STUCK",
+      "truth_category": "sensor_fault",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "shared_event": 1
+      },
+      "family": "area_humidity_shift",
+      "truth_category": "shared_event",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "shared_event": 1
+      },
+      "family": "area_light_off",
+      "truth_category": "shared_event",
+      "windows": 1
+    },
+    {
+      "decisions": {
+        "sensor_fault": 1,
+        "shared_event": 1
+      },
+      "family": "area_light_on",
+      "truth_category": "shared_event",
+      "windows": 2
+    },
+    {
+      "decisions": {
+        "shared_event": 1
+      },
+      "family": "area_temperature_shift",
+      "truth_category": "shared_event",
+      "windows": 1
+    }
+  ],
+  "per_scenario": [
+    {
+      "event_to_fault": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "false_alarm_rate": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "fault_to_event": {
+        "ci95_high": 0.769276,
+        "ci95_low": 0.117621,
+        "defined": true,
+        "denominator": 5,
+        "numerator": 2,
+        "value": 0.4
+      },
+      "scenario": "fixture_fault",
+      "shared_event_recall": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "windows": 5
+    },
+    {
+      "event_to_fault": {
+        "ci95_high": 0.624465,
+        "ci95_low": 0.036224,
+        "defined": true,
+        "denominator": 5,
+        "numerator": 1,
+        "value": 0.2
+      },
+      "false_alarm_rate": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "fault_to_event": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "scenario": "fixture_shared_event",
+      "shared_event_recall": {
+        "ci95_high": 0.963776,
+        "ci95_low": 0.375535,
+        "defined": true,
+        "denominator": 5,
+        "numerator": 4,
+        "value": 0.8
+      },
+      "windows": 5
+    },
+    {
+      "event_to_fault": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "false_alarm_rate": {
+        "ci95_high": 0.509838,
+        "ci95_low": 0.056682,
+        "defined": true,
+        "denominator": 10,
+        "numerator": 2,
+        "value": 0.2
+      },
+      "fault_to_event": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "scenario": "normal",
+      "shared_event_recall": {
+        "ci95_high": null,
+        "ci95_low": null,
+        "defined": false,
+        "denominator": 0,
+        "numerator": 0,
+        "value": null
+      },
+      "windows": 10
+    }
+  ],
+  "primary_rq": {
+    "event_to_fault": {
+      "ci95_high": 0.624465,
+      "ci95_low": 0.036224,
+      "defined": true,
+      "denominator": 5,
+      "numerator": 1,
+      "value": 0.2
+    },
+    "false_alarm_rate": {
+      "ci95_high": 0.509838,
+      "ci95_low": 0.056682,
+      "defined": true,
+      "denominator": 10,
+      "numerator": 2,
+      "value": 0.2
+    },
+    "fault_to_event": {
+      "ci95_high": 0.769276,
+      "ci95_low": 0.117621,
+      "defined": true,
+      "denominator": 5,
+      "numerator": 2,
+      "value": 0.4
+    },
+    "shared_event_recall": {
+      "ci95_high": 0.963776,
+      "ci95_low": 0.375535,
+      "defined": true,
+      "denominator": 5,
+      "numerator": 4,
+      "value": 0.8
+    }
+  },
+  "windows": {
+    "by_truth_category": {
+      "normal": 10,
+      "sensor_fault": 5,
+      "shared_event": 5
+    },
+    "excluded": 0,
+    "excluded_by_category": {},
+    "in_primary_analysis": 20,
+    "total": 20
+  }
+}

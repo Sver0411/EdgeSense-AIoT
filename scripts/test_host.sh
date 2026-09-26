@@ -37,6 +37,7 @@ INCLUDES=(-I"$SENSOR_DIR" -I"$CONFIG_DIR" -I"$PROTOCOL_DIR" -I"$VENDOR_DIR" -I"$
 EDGE_SRC=(
     "$SENSOR_DIR/edge_channel.c"
     "$SENSOR_DIR/edge_sensor_state.c"
+    "$SENSOR_DIR/edge_sensor_map.c"
     "$CONFIG_DIR/edge_nodes.c"
     "$PROTOCOL_DIR/edge_protocol.c"
 )
@@ -108,6 +109,7 @@ suites=(
     "edge_sensor_state|$TEST_DIR/test_edge_sensor_state.c"
     "vendor_supervisor_contract|$TEST_DIR/test_vendor_supervisor_contract.c"
     "node_config|$TEST_DIR/test_node_config.c"
+    "edge_sensor_map|$TEST_DIR/test_edge_sensor_map.c"
     "edge_protocol|$TEST_DIR/test_edge_protocol.c"
 )
 

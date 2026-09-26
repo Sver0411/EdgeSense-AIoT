@@ -1,0 +1,77 @@
+{
+  "_comment": "EXP-000 is the offline framework self-check. It has no hardware and no raw logs; it exists to prove that analyze_experiment.py computes correct metrics on a fixture whose answers are known in advance, and that it REFUSES to report a metric whose denominator has no ground truth. The decision file under results/ is authored by hand BECAUSE this is a fixture: every expected number is derived by counting, not by running the system.",
+  "status": "complete",
+  "exp_id": "EXP-000",
+  "title": "framework self-check on a fixture with known answers",
+  "date": "2026-01-01",
+
+  "hardware": {
+    "nodes": [],
+    "note": "offline fixture: no hardware is used, no device is contacted"
+  },
+
+  "provenance": {
+    "fw_commit": null,
+    "config_sha256": null,
+    "vendor_manifest_generated_at": null
+  },
+
+  "sampling": {
+    "mode": "synthetic_fixture",
+    "interval_s": 60,
+    "note": "window length of the fixture, not a device sampling interval"
+  },
+
+  "pairing_config": {
+    "window_s": 60,
+    "max_sample_age_ms": null,
+    "note": "not applicable to a fixture; max_sample_age is set from EXP-004 on hardware"
+  },
+
+  "fault_taxonomy_version": "phase-0.2",
+
+  "input_mode": "synthetic_fixture",
+
+  "dataset_reuse": {
+    "reuses_raw_dataset_of": null,
+    "allowed_reuse": [],
+    "forbidden_reuse": ["any raw dataset"],
+    "note": "the fixture is self-contained and shares nothing with any hardware experiment"
+  },
+
+  "n": {
+    "planned": 20,
+    "actual": 20,
+    "basis": "fixture size chosen so every expected metric can be verified by counting by hand"
+  },
+
+  "statistics": {
+    "test": null,
+    "alpha": null,
+    "paired": null,
+    "multiplicity_correction": null,
+    "note": "this is a correctness check of the analysis code, not a measurement, so no test is declared"
+  },
+
+  "expected_event": "20 decision windows: 5 over sensor faults, 5 over shared events, 10 over quiet periods",
+
+  "expected_metrics": {
+    "_comment": "Hand-derived by counting the fixture. These are the numbers tests assert.",
+    "windows_total": 20,
+    "windows_in_primary": 20,
+    "truth_sensor_fault": 5,
+    "truth_shared_event": 5,
+    "truth_normal": 10,
+    "fault_to_event": {"numerator": 2, "denominator": 5, "value": 0.4},
+    "event_to_fault": {"numerator": 1, "denominator": 5, "value": 0.2},
+    "shared_event_recall": {"numerator": 4, "denominator": 5, "value": 0.8},
+    "false_alarm_rate": {"numerator": 2, "denominator": 10, "value": 0.2},
+    "confusion_matrix": {
+      "sensor_fault": {"normal": 0, "sensor_fault": 3, "shared_event": 2},
+      "shared_event": {"normal": 0, "sensor_fault": 1, "shared_event": 4},
+      "normal": {"normal": 8, "sensor_fault": 0, "shared_event": 2}
+    }
+  },
+
+  "status_values": ["planned", "running", "complete", "aborted", "partial"]
+}

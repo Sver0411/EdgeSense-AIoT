@@ -1,0 +1,21 @@
+# EdgeSense sensor-node build defaults.
+#
+# Nodes B and C are built from this one project with no source-level difference:
+# the node identity comes from config/edge_config.yaml and reaches the firmware
+# through the generated header. That is deliberate — two nodes that are supposed to
+# be redundant witnesses must not differ in code.
+
+CONFIG_IDF_TARGET="esp32s3"
+
+# Board: ESP32-S3 N16R8 — 16 MiB flash, 8 MiB embedded PSRAM.
+# Status: documented, not verified by this project. The figure comes from the
+# hardware list and from an esptool flash_id reading taken on the pre-existing
+# SensorTrust build; no EdgeSense board has been read out yet.
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+
+# PSRAM stays OFF. Nothing in the sensing path or the protocol needs it, the
+# working set is a few hundred bytes of fixed-size frames, and a disabled PSRAM is
+# one less thing that can differ between two nodes that are supposed to be
+# identical. (The earlier SensorTrust build made the same choice, and reported
+# runtime-available PSRAM as 0 bytes.)
+CONFIG_SPIRAM=n

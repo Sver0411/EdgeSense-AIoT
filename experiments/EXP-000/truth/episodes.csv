@@ -1,0 +1,11 @@
+episode_id,truth_category,event_source,family,channels,nodes,start_ts,end_ts,scenario,physical_or_injected,ground_truth_source,injection_method,intervention_description,notes
+EXP-000-E01,sensor_fault,sensing,SPIKE,temperature,B,2026-01-01T00:00:00Z,2026-01-01T00:01:00Z,fixture_fault,injected,injection_plan,spike_amplitude_10C,,fixture: not a real injection
+EXP-000-E02,sensor_fault,sensing,DRIFT,temperature,B,2026-01-01T00:10:00Z,2026-01-01T00:11:00Z,fixture_fault,injected,injection_plan,drift_0.05C_per_s,,fixture
+EXP-000-E03,sensor_fault,sensing,STUCK,humidity,B,2026-01-01T00:20:00Z,2026-01-01T00:21:00Z,fixture_fault,injected,injection_plan,stuck_epsilon_0.01,,
+EXP-000-E04,sensor_fault,sensing,RANGE,temperature,B,2026-01-01T00:30:00Z,2026-01-01T00:31:00Z,fixture_fault,injected,injection_plan,value_150C,,
+EXP-000-E05,sensor_fault,sensing,MISSING,light,B,2026-01-01T00:40:00Z,2026-01-01T00:41:00Z,fixture_fault,injected,injection_plan,drop_6_samples,,
+EXP-000-E06,shared_event,environment,area_light_on,light,B|C,2026-01-01T00:50:00Z,2026-01-01T00:51:00Z,fixture_shared_event,physical,physical_intervention_log,,room light switched on,fixture: both nodes are affected
+EXP-000-E07,shared_event,environment,area_light_off,light,B|C,2026-01-01T01:00:00Z,2026-01-01T01:01:00Z,fixture_shared_event,physical,physical_intervention_log,,room light switched off,
+EXP-000-E08,shared_event,environment,area_humidity_shift,humidity,B|C,2026-01-01T01:10:00Z,2026-01-01T01:11:00Z,fixture_shared_event,physical,physical_intervention_log,,humidity raised across the room,
+EXP-000-E09,shared_event,environment,area_temperature_shift,temperature,B|C,2026-01-01T01:20:00Z,2026-01-01T01:21:00Z,fixture_shared_event,physical,physical_intervention_log,,heater turned on across the room,
+EXP-000-E10,shared_event,environment,area_light_on,light,B|C,2026-01-01T01:30:00Z,2026-01-01T01:31:00Z,fixture_shared_event,physical,physical_intervention_log,,second light switched on,
