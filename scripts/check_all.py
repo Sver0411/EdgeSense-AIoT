@@ -122,10 +122,16 @@ def run(check: Check, quiet: bool) -> str:
 
 
 def _last_meaningful_line(output: str) -> str:
-    for line in reversed(output.strip().splitlines()):
-        stripped = line.strip()
-        if stripped and not stripped.startswith("["):
-            return stripped[:120]
+    """Pick the line that best summarises a check's output.
+
+    Lines that announce what was NOT done are skipped: a SKIP note is not a summary,
+    and letting one stand in for a result is how a report starts misleading readers.
+    """
+    lines = [line.strip() for line in output.strip().splitlines() if line.strip()]
+    for line in reversed(lines):
+        if line.startswith("[") or line.startswith("SKIP"):
+            continue
+        return line[:120]
     return ""
 
 
