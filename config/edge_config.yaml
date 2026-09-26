@@ -1,0 +1,86 @@
+# EdgeSense node and link configuration — the single authoritative source.
+#
+# This file is the source of truth for values that both the firmware and the
+# evaluation tooling must agree on. scripts/generate_config.py renders it into
+# firmware/common/config/edge_config_generated.h, and scripts/check_config_parity.py
+# fails when the committed header no longer matches this file.
+#
+# That mechanism exists because the failure it prevents is silent: a threshold
+# changed in one place and not the other makes firmware and offline evaluation
+# disagree about the same run, and nothing about either file looks wrong.
+#
+# Values marked `documented_not_verified` come from the wiring records of the
+# pre-existing projects (see docs/hardware/wiring.md). They are NOT verified on
+# EdgeSense hardware yet. Do not change that status without a real I2C scan.
+
+schema: 1
+config_version: 1
+
+# Versions that must be visible on the wire and in every experiment manifest.
+protocol_version: 1
+fault_taxonomy_version: "phase-0.2"
+
+sampling:
+  # Fixed dense reference cadence used by EXP-004 / EXP-005 / EXP-006. Adaptive
+  # sampling is kept out of the primary comparison on purpose, so that sampling
+  # density cannot be a confounder for the discrimination question.
+  primary_rq_interval_s: 5
+  # The adaptive ladder, in seconds, longest to shortest. Evaluated in EXP-007.
+  adaptive_ladder_s: [60, 40, 20, 10, 5]
+  # Gateway beacon period, used for the node-to-gateway time mapping.
+  beacon_interval_s: 60
+  # Node heartbeat period; a node silent longer than the timeout is offline.
+  heartbeat_interval_s: 30
+  node_timeout_s: 120
+
+# I2C bus and sensor addresses. Status: documented, not verified.
+i2c:
+  sda_gpio: 8
+  scl_gpio: 9
+  sht30_addr: 0x44
+  bh1750_addr: 0x23
+
+soil:
+  # Soil moisture is deliberately NOT a spatially-shared-event channel: its
+  # spatial locality is too strong for two probes 30-50 cm apart to be
+  # comparable witnesses. It stays optional and single-node.
+  enabled: false
+  adc_gpio: 1
+  # A probe with no medium reads its rail value. That must never be published as
+  # a measurement, which is what per-channel validity is for.
+  require_calibration: true
+
+lora:
+  # E220-400T22D over UART1. Status: documented, not verified.
+  uart_num: 1
+  baud: 9600
+  m0_gpio: 13
+  m1_gpio: 14
+  aux_gpio: 15
+  txd_gpio: 17
+  rxd_gpio: 16
+  module_address: 0x0000
+  reg0: 0x62
+  channel: 0x17
+
+# Node roles. B and C must be identical apart from node_id: they are redundant
+# witnesses of one environment, and a firmware divergence would make "the nodes
+# disagree" unattributable. The symmetry is asserted by check_config_parity.py.
+nodes:
+  - role: gateway
+    node_id: 0
+    name: A
+    channels: []
+    soil_enabled: false
+
+  - role: sensor
+    node_id: 1
+    name: B
+    channels: [temperature, humidity, light]
+    soil_enabled: false
+
+  - role: sensor
+    node_id: 2
+    name: C
+    channels: [temperature, humidity, light]
+    soil_enabled: false

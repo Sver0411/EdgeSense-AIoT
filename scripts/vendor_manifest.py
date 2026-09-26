@@ -117,6 +117,7 @@ def collect() -> dict[str, Any]:
             "role_in_edgesense": repo.get("role_in_edgesense"),
             "take": [],
             "preserve_readonly": [],
+            "vendored_into": [],
             "missing": [],
         }
 
@@ -161,6 +162,25 @@ def collect() -> dict[str, Any]:
                 }
             )
 
+        for item in repo.get("vendored_into", []):
+            src_rel = item["src"]
+            dest_rel = item["dest"]
+            src_path = path / src_rel
+            dest_path = REPO_ROOT / dest_rel
+            record: dict[str, Any] = {
+                "src": src_rel,
+                "dest": dest_rel,
+                "src_present": src_path.is_file(),
+                "dest_present": dest_path.is_file(),
+            }
+            if src_path.is_file():
+                record["src_sha256"] = sha256_of(src_path)
+            if dest_path.is_file():
+                record["dest_sha256"] = sha256_of(dest_path)
+            if record.get("src_sha256") and record.get("dest_sha256"):
+                record["identical"] = record["src_sha256"] == record["dest_sha256"]
+            entry["vendored_into"].append(record)
+
         manifest["repos"].append(entry)
 
     return manifest
@@ -198,6 +218,31 @@ def verify(manifest: dict[str, Any]) -> int:
         for rel in repo.get("missing", []):
             problems.append(f"{name}: declared but absent at freeze time: {rel}")
 
+        for record in repo.get("vendored_into", []):
+            dest_rel = record["dest"]
+            dest_path = REPO_ROOT / dest_rel
+            src_path = path / record["src"]
+
+            if not src_path.is_file():
+                problems.append(f"{name}: upstream src vanished: {record['src']}")
+                continue
+            if not dest_path.is_file():
+                problems.append(f"{name}: vendored copy missing: {dest_rel}")
+                continue
+
+            src_sha = sha256_of(src_path)
+            if record.get("src_sha256") and src_sha != record["src_sha256"]:
+                problems.append(
+                    f"{name}: UPSTREAM DRIFT in {record['src']} "
+                    f"({record['src_sha256'][:12]} -> {src_sha[:12]})"
+                )
+            dest_sha = sha256_of(dest_path)
+            if dest_sha != src_sha:
+                problems.append(
+                    f"{name}: VENDORED COPY EDITED: {dest_rel} no longer matches upstream "
+                    f"{record['src']} (dest {dest_sha[:12]} vs src {src_sha[:12]})"
+                )
+
     if problems:
         print(f"VENDOR FREEZE CHECK FAILED — {len(problems)} problem(s):")
         for line in problems:
@@ -229,8 +274,16 @@ def main(argv: list[str] | None = None) -> int:
     frozen = sum(len(r["take"]) for r in manifest["repos"])
     preserved = sum(len(r["preserve_readonly"]) for r in manifest["repos"])
     missing = sum(len(r["missing"]) for r in manifest["repos"])
+    vend = [v for r in manifest["repos"] for v in r.get("vendored_into", [])]
+    vend_ok = sum(1 for v in vend if v.get("identical") is True)
+    vend_bad = sum(1 for v in vend if v.get("identical") is False)
+    vend_absent = sum(1 for v in vend if not v.get("dest_present"))
     print(f"wrote {MANIFEST_PATH.relative_to(REPO_ROOT)}")
     print(f"  repos={len(manifest['repos'])} frozen_files={frozen} preserved={preserved} missing={missing}")
+    print(
+        f"  vendored_into_edge_sense={len(vend)} identical={vend_ok} "
+        f"modified={vend_bad} not_yet_copied={vend_absent}"
+    )
     for repo in manifest["repos"]:
         flag = "" if repo.get("commit_matches_declared") is not False else "  <-- COMMIT MISMATCH"
         if repo.get("no_git_history"):

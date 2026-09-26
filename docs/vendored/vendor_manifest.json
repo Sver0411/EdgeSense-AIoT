@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-26T18:55:22+00:00",
+  "generated_at": "2026-09-26T19:07:20+00:00",
   "frozen_on": "2026-09-27",
   "generator": "scripts/vendor_manifest.py",
   "repos": [
@@ -63,6 +63,7 @@
         }
       ],
       "preserve_readonly": [],
+      "vendored_into": [],
       "missing": [],
       "observed_commit": "fad43a495abddb9029ef005d16a0909ca1de957c",
       "observed_commit_date": "2026-09-23T22:22:13+08:00",
@@ -205,6 +206,12 @@
           "size_bytes": 5998
         },
         {
+          "path": "firmware/main/sensor_bh1750.h",
+          "blob_sha1": "bb7ae291cc754d905536b63dd06eaa7204e2af81",
+          "sha256": "f716fd663632a7ea823def2bee2c2faba2d38c11782b495531b23e6bbb52b5ff",
+          "size_bytes": 2383
+        },
+        {
           "path": "simulator/replay.py",
           "blob_sha1": "725d66eb588013c176e117de80f178717ccaf72f",
           "sha256": "9a9a0ee241b49c50d2cf00dcbe8e57d64688a36a3d1f352b4c27baef7ad51f64",
@@ -284,6 +291,170 @@
         }
       ],
       "preserve_readonly": [],
+      "vendored_into": [
+        {
+          "src": "firmware/main/sensor.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "b6e9fbc760fb560309d02640c3734656666efe5b0510617eaf5d0f49d114af00",
+          "dest_sha256": "b6e9fbc760fb560309d02640c3734656666efe5b0510617eaf5d0f49d114af00",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_backend.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_backend.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "2fb07455ab5149b39494c9ea27069a16a3846715cb4f65264291e7a9ab0dfb41",
+          "dest_sha256": "2fb07455ab5149b39494c9ea27069a16a3846715cb4f65264291e7a9ab0dfb41",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_supervisor.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_supervisor.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "48819cb2d453ace01e609a1a1e19d4fad6595156d4333dc4a234ba4c5c443d99",
+          "dest_sha256": "48819cb2d453ace01e609a1a1e19d4fad6595156d4333dc4a234ba4c5c443d99",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_supervisor.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_supervisor.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "37775cfb16213dda37014d080aa3e44ee6e1f0cc06f1b952f0999156a2cb9aa9",
+          "dest_sha256": "37775cfb16213dda37014d080aa3e44ee6e1f0cc06f1b952f0999156a2cb9aa9",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sht30_proto.h",
+          "dest": "firmware/common/vendor/adaptivesense/sht30_proto.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "f6cd34a8b8a90017cbfca0bace9a18a752ae454d56c64acb866fbfe7a5a342ca",
+          "dest_sha256": "f6cd34a8b8a90017cbfca0bace9a18a752ae454d56c64acb866fbfe7a5a342ca",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sht30_proto.c",
+          "dest": "firmware/common/vendor/adaptivesense/sht30_proto.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "fd4f19e596ab7aa8079714d8fddb50dc7e525e9b8d3eed8e5f63b45a79486d8c",
+          "dest_sha256": "fd4f19e596ab7aa8079714d8fddb50dc7e525e9b8d3eed8e5f63b45a79486d8c",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/bh1750_proto.h",
+          "dest": "firmware/common/vendor/adaptivesense/bh1750_proto.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "d8876152e3f078e1c25466d15aad0d2be7c3ef162cff63c5e6d814832bbf63dd",
+          "dest_sha256": "d8876152e3f078e1c25466d15aad0d2be7c3ef162cff63c5e6d814832bbf63dd",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/bh1750_proto.c",
+          "dest": "firmware/common/vendor/adaptivesense/bh1750_proto.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "a6acb333d579b9b547e32b8e2a77af2f71c04ecde4df1b3b6620facd0031a747",
+          "dest_sha256": "a6acb333d579b9b547e32b8e2a77af2f71c04ecde4df1b3b6620facd0031a747",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/soil_moisture.h",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "d42e0399683fc64ff1b53cd0b8f2435ffa00d17d80b0f71db83deb2e3006d4f7",
+          "dest_sha256": "d42e0399683fc64ff1b53cd0b8f2435ffa00d17d80b0f71db83deb2e3006d4f7",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/soil_moisture_math.h",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture_math.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "25945184ef28e556e9889fc2a8ccda276c6d80354e1dd65d603958543279eafd",
+          "dest_sha256": "25945184ef28e556e9889fc2a8ccda276c6d80354e1dd65d603958543279eafd",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/soil_moisture_math.c",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture_math.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "0f387ca67f8fc9a083451628ee9512bdb19060ec1e6c9c924f83f7de0db24950",
+          "dest_sha256": "0f387ca67f8fc9a083451628ee9512bdb19060ec1e6c9c924f83f7de0db24950",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "e1f2c18c31a37b436bfbde50e16243197138a98000044a899d43dd7bc24188a9",
+          "dest_sha256": "e1f2c18c31a37b436bfbde50e16243197138a98000044a899d43dd7bc24188a9",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_bus.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bus.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "473530aa98d31166f3f0f969662558ad84eac78ef24f073c76b2611cfdfb39f9",
+          "dest_sha256": "473530aa98d31166f3f0f969662558ad84eac78ef24f073c76b2611cfdfb39f9",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_bus.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bus.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "b5ccbdd3f97d0008da60c25343727a3b8b5e4878d3048a08cccdeb604e61d912",
+          "dest_sha256": "b5ccbdd3f97d0008da60c25343727a3b8b5e4878d3048a08cccdeb604e61d912",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_sht30.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_sht30.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "c0f60f2b5b058588f1d57cbab728d8fc0fd51cd29d0cfbd91758cc6b695c1385",
+          "dest_sha256": "c0f60f2b5b058588f1d57cbab728d8fc0fd51cd29d0cfbd91758cc6b695c1385",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_bh1750.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bh1750.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "f716fd663632a7ea823def2bee2c2faba2d38c11782b495531b23e6bbb52b5ff",
+          "dest_sha256": "f716fd663632a7ea823def2bee2c2faba2d38c11782b495531b23e6bbb52b5ff",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/sensor_bh1750.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bh1750.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "e0d993486792e65c2ce4e7a5d46dd420dafbea2c24fea69e0fdada633f8691ce",
+          "dest_sha256": "e0d993486792e65c2ce4e7a5d46dd420dafbea2c24fea69e0fdada633f8691ce",
+          "identical": true
+        },
+        {
+          "src": "firmware/main/soil_moisture.c",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "84bf1f0c5a391e95cfa8784b04c9ba304fc6f7ddc6f089d123aee67e29969869",
+          "dest_sha256": "84bf1f0c5a391e95cfa8784b04c9ba304fc6f7ddc6f089d123aee67e29969869",
+          "identical": true
+        }
+      ],
       "missing": [],
       "observed_commit": "6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b",
       "observed_commit_date": "2026-09-23T13:28:55+08:00",
@@ -349,6 +520,7 @@
         }
       ],
       "preserve_readonly": [],
+      "vendored_into": [],
       "missing": [],
       "observed_commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
       "observed_commit_date": "2026-09-27T02:44:16+08:00",
@@ -384,6 +556,7 @@
         }
       ],
       "preserve_readonly": [],
+      "vendored_into": [],
       "missing": [],
       "observed_commit": "485494ef46445681027a5678a8ef87824625661c",
       "observed_commit_date": "2026-09-16T01:34:43+08:00",
@@ -523,6 +696,7 @@
           "size_bytes": 612
         }
       ],
+      "vendored_into": [],
       "missing": [],
       "observed_commit": null,
       "observed_commit_date": null,

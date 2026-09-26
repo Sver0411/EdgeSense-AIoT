@@ -64,6 +64,7 @@
         "firmware/main/soil_moisture_math.h",
         "firmware/main/sensor_sht30.c",
         "firmware/main/sensor_bh1750.c",
+        "firmware/main/sensor_bh1750.h",
         "simulator/replay.py",
         "simulator/metrics.py",
         "simulator/adaptive.py",
@@ -77,6 +78,80 @@
         "tests/host_build.py",
         "docs/change_score_spec.md",
         "docs/methodology.md"
+      ],
+      "vendored_into": [
+        {
+          "src": "firmware/main/sensor.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor.h"
+        },
+        {
+          "src": "firmware/main/sensor_backend.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_backend.h"
+        },
+        {
+          "src": "firmware/main/sensor_supervisor.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_supervisor.h"
+        },
+        {
+          "src": "firmware/main/sensor_supervisor.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_supervisor.c"
+        },
+        {
+          "src": "firmware/main/sht30_proto.h",
+          "dest": "firmware/common/vendor/adaptivesense/sht30_proto.h"
+        },
+        {
+          "src": "firmware/main/sht30_proto.c",
+          "dest": "firmware/common/vendor/adaptivesense/sht30_proto.c"
+        },
+        {
+          "src": "firmware/main/bh1750_proto.h",
+          "dest": "firmware/common/vendor/adaptivesense/bh1750_proto.h"
+        },
+        {
+          "src": "firmware/main/bh1750_proto.c",
+          "dest": "firmware/common/vendor/adaptivesense/bh1750_proto.c"
+        },
+        {
+          "src": "firmware/main/soil_moisture.h",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture.h"
+        },
+        {
+          "src": "firmware/main/soil_moisture_math.h",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture_math.h"
+        },
+        {
+          "src": "firmware/main/soil_moisture_math.c",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture_math.c"
+        },
+        {
+          "src": "firmware/main/sensor.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor.c"
+        },
+        {
+          "src": "firmware/main/sensor_bus.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bus.h"
+        },
+        {
+          "src": "firmware/main/sensor_bus.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bus.c"
+        },
+        {
+          "src": "firmware/main/sensor_sht30.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_sht30.c"
+        },
+        {
+          "src": "firmware/main/sensor_bh1750.h",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bh1750.h"
+        },
+        {
+          "src": "firmware/main/sensor_bh1750.c",
+          "dest": "firmware/common/vendor/adaptivesense/sensor_bh1750.c"
+        },
+        {
+          "src": "firmware/main/soil_moisture.c",
+          "dest": "firmware/common/vendor/adaptivesense/soil_moisture.c"
+        }
       ],
       "do_not_take": [
         "firmware/main/communication.c",
