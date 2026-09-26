@@ -27,18 +27,22 @@ VENDOR_FLAGS=(-std=c11 -Wall -Wextra -O1 -g)
 
 SENSOR_DIR="$ROOT/firmware/common/sensor"
 CONFIG_DIR="$ROOT/firmware/common/config"
+PROTOCOL_DIR="$ROOT/firmware/common/protocol"
 VENDOR_DIR="$ROOT/firmware/common/vendor/adaptivesense"
+VENDOR_EG_DIR="$ROOT/firmware/common/vendor/eventguard"
 TEST_DIR="$ROOT/tests/host"
 
-INCLUDES=(-I"$SENSOR_DIR" -I"$CONFIG_DIR" -I"$VENDOR_DIR" -I"$TEST_DIR")
+INCLUDES=(-I"$SENSOR_DIR" -I"$CONFIG_DIR" -I"$PROTOCOL_DIR" -I"$VENDOR_DIR" -I"$VENDOR_EG_DIR" -I"$TEST_DIR")
 
 EDGE_SRC=(
     "$SENSOR_DIR/edge_channel.c"
     "$SENSOR_DIR/edge_sensor_state.c"
     "$CONFIG_DIR/edge_nodes.c"
+    "$PROTOCOL_DIR/edge_protocol.c"
 )
 VENDOR_SRC=(
     "$VENDOR_DIR/sensor_supervisor.c"
+    "$VENDOR_EG_DIR/protocol.c"
 )
 
 mkdir -p "$BUILD" || exit 1
@@ -104,6 +108,7 @@ suites=(
     "edge_sensor_state|$TEST_DIR/test_edge_sensor_state.c"
     "vendor_supervisor_contract|$TEST_DIR/test_vendor_supervisor_contract.c"
     "node_config|$TEST_DIR/test_node_config.c"
+    "edge_protocol|$TEST_DIR/test_edge_protocol.c"
 )
 
 passed=0

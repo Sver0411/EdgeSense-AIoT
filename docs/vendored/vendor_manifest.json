@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-26T19:07:20+00:00",
+  "generated_at": "2026-09-26T19:14:08+00:00",
   "frozen_on": "2026-09-27",
   "generator": "scripts/vendor_manifest.py",
   "repos": [
@@ -520,7 +520,80 @@
         }
       ],
       "preserve_readonly": [],
-      "vendored_into": [],
+      "vendored_into": [
+        {
+          "src": "firmware/common/e220.h",
+          "dest": "firmware/common/vendor/eventguard/e220.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "81abeaf4c8b63a05993ec3c9c7606f48f24d8fc77609d13e01ca0c4189c37197",
+          "dest_sha256": "81abeaf4c8b63a05993ec3c9c7606f48f24d8fc77609d13e01ca0c4189c37197",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/e220.c",
+          "dest": "firmware/common/vendor/eventguard/e220.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "ed5e737f940867cb90aea956e1c918e9d7595a9a20130be18d4105f836afe132",
+          "dest_sha256": "ed5e737f940867cb90aea956e1c918e9d7595a9a20130be18d4105f836afe132",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/e220_stream_parser.h",
+          "dest": "firmware/common/vendor/eventguard/e220_stream_parser.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "2107f0ba88a769f6b50ea321484d323ce442cbed629faf6dd990dc48eaf6029b",
+          "dest_sha256": "2107f0ba88a769f6b50ea321484d323ce442cbed629faf6dd990dc48eaf6029b",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/e220_stream_parser.c",
+          "dest": "firmware/common/vendor/eventguard/e220_stream_parser.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "fe2f359f4ffb3c9ee88547ed084f4d2451393472023a34e642ff8d6bd86e8a5b",
+          "dest_sha256": "fe2f359f4ffb3c9ee88547ed084f4d2451393472023a34e642ff8d6bd86e8a5b",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/protocol.h",
+          "dest": "firmware/common/vendor/eventguard/protocol.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "0c89a555539449c0e3beda56cc1de3f2a81eea58b97ce91c91c9516ceeee8665",
+          "dest_sha256": "0c89a555539449c0e3beda56cc1de3f2a81eea58b97ce91c91c9516ceeee8665",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/protocol.c",
+          "dest": "firmware/common/vendor/eventguard/protocol.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "5cf9fc23477457d641ea27e5c12738e646fa2d4da6a46d938d62b83edbd91afe",
+          "dest_sha256": "5cf9fc23477457d641ea27e5c12738e646fa2d4da6a46d938d62b83edbd91afe",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/faults.h",
+          "dest": "firmware/common/vendor/eventguard/faults.h",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "249da227ac84f80e9f8992872ea553ac07ab3d2e6cb43994cd1c57c9fe6248b5",
+          "dest_sha256": "249da227ac84f80e9f8992872ea553ac07ab3d2e6cb43994cd1c57c9fe6248b5",
+          "identical": true
+        },
+        {
+          "src": "firmware/common/faults.c",
+          "dest": "firmware/common/vendor/eventguard/faults.c",
+          "src_present": true,
+          "dest_present": true,
+          "src_sha256": "8366d31c29a8f2f927c468ef9b43cb61c29a228e87929d0b2b3db17c96e59129",
+          "dest_sha256": "8366d31c29a8f2f927c468ef9b43cb61c29a228e87929d0b2b3db17c96e59129",
+          "identical": true
+        }
+      ],
       "missing": [],
       "observed_commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
       "observed_commit_date": "2026-09-27T02:44:16+08:00",

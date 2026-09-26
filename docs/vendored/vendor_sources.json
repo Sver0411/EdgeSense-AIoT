@@ -194,6 +194,40 @@
         "paper/",
         "results/"
       ],
+      "vendored_into": [
+        {
+          "src": "firmware/common/e220.h",
+          "dest": "firmware/common/vendor/eventguard/e220.h"
+        },
+        {
+          "src": "firmware/common/e220.c",
+          "dest": "firmware/common/vendor/eventguard/e220.c"
+        },
+        {
+          "src": "firmware/common/e220_stream_parser.h",
+          "dest": "firmware/common/vendor/eventguard/e220_stream_parser.h"
+        },
+        {
+          "src": "firmware/common/e220_stream_parser.c",
+          "dest": "firmware/common/vendor/eventguard/e220_stream_parser.c"
+        },
+        {
+          "src": "firmware/common/protocol.h",
+          "dest": "firmware/common/vendor/eventguard/protocol.h"
+        },
+        {
+          "src": "firmware/common/protocol.c",
+          "dest": "firmware/common/vendor/eventguard/protocol.c"
+        },
+        {
+          "src": "firmware/common/faults.h",
+          "dest": "firmware/common/vendor/eventguard/faults.h"
+        },
+        {
+          "src": "firmware/common/faults.c",
+          "dest": "firmware/common/vendor/eventguard/faults.c"
+        }
+      ],
       "role_in_edgesense": "LoRa 传输层（CRC 帧 / 去重 / 流式解析 / 应用层故障注入）+ 实验编排与审计方法论。其研究问题（冗余预算）不复用"
     },
     {
