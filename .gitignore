@@ -1,0 +1,59 @@
+# EdgeSense — ignore rules
+
+# ---- secrets / local environment -------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ---- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# ---- ESP-IDF / firmware build output ---------------------------------------
+firmware/**/build/
+firmware/**/managed_components/
+firmware/**/sdkconfig
+firmware/**/sdkconfig.old
+firmware/**/dependencies.lock
+*.bin
+*.elf
+*.map
+
+# ---- databases / model artifacts (must never be committed) ------------------
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.joblib
+*.pkl
+*.onnx
+
+# ---- raw experiment data ----------------------------------------------------
+# Raw logs are evidence: they are archived with integrity hashes, not committed
+# as ordinary working files. Date hashes and manifests ARE committed.
+experiments/**/raw/*
+!experiments/**/raw/.gitkeep
+
+# ---- macOS / editor --------------------------------------------------------
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+.idea/
+.vscode/
+*.swp
+
+# ---- local agent workspace (NOT a cache: keep the files, ignore nothing) ----
+# .workbuddy/ holds project memory and must be committed except transient state.
+.workbuddy/**/*.tmp

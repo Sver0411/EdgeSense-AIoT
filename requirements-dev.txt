@@ -1,0 +1,10 @@
+# EdgeSense — development / evaluation dependencies only.
+#
+# Runtime dependencies for the backend (FastAPI, SQLAlchemy, psycopg) are NOT
+# listed here on purpose: the backend does not exist yet, and pre-installing its
+# stack would only add dependency weight to a phase that cannot use it.
+# Add them in the phase that implements the backend.
+
+pytest>=9,<10
+PyYAML>=6,<7
+pyserial>=3.5,<4

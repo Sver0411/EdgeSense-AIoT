@@ -1,0 +1,533 @@
+{
+  "schema": 1,
+  "generated_at": "2026-09-26T18:55:22+00:00",
+  "frozen_on": "2026-09-27",
+  "generator": "scripts/vendor_manifest.py",
+  "repos": [
+    {
+      "name": "SensorTrust",
+      "local_path": "/Users/mac/Documents/SensorTrust",
+      "exists": true,
+      "remote": "https://github.com/Sver0411/SensorTrust.git",
+      "declared_commit": "fad43a495abddb9029ef005d16a0909ca1de957c",
+      "no_git_history": false,
+      "role_in_edgesense": "Sensor Reliability Engine 内核 + 单通道 baseline (B1) + 故障注入器 + 证据管线方法论",
+      "take": [
+        {
+          "path": "core/sensor_trust.c",
+          "blob_sha1": "4ac3d1fae8ab5d7801b73ae7cc0275bf3f224105",
+          "sha256": "84ff663157edb012af0290cf9f0f1d6400cee382f47ea272e8ec2089e59a2b90",
+          "size_bytes": 18940
+        },
+        {
+          "path": "core/sensor_trust.h",
+          "blob_sha1": "c1c176a14655f71d1df0d6c2ecdf4dda4ff4170b",
+          "sha256": "d81eba8192d60dbdf480ffaa8280d0ec46d5c2463c1ca7035c52a87aeff15089",
+          "size_bytes": 12833
+        },
+        {
+          "path": "firmware/main/fault_injector.c",
+          "blob_sha1": "f4e25d7f5e02b6b3e03ae44694131fe5e1830471",
+          "sha256": "e1a7a1f7067de273dbfc2966241b0105d11f67ea839edd3a28b2f23aed1d4477",
+          "size_bytes": 2336
+        },
+        {
+          "path": "firmware/main/fault_injector.h",
+          "blob_sha1": "3482de75ac688d4094ccfd432ab3ad65e4cfe953",
+          "sha256": "f4b263982dc03dbc3c13fee135e2bd063533b85beda606511532879859e2870c",
+          "size_bytes": 1045
+        },
+        {
+          "path": "firmware/main/sensor_reader.c",
+          "blob_sha1": "53524bc1d5e1af81bff483ed369804b384f8a1b4",
+          "sha256": "54153dc8e312a9404fbe6d6be481d9013ce1fa1c43b086f53d52f6a98cf9645e",
+          "size_bytes": 2569
+        },
+        {
+          "path": "hardware/capture.py",
+          "blob_sha1": "ce0d166f9011cd35c00b38b182501a38efda5e33",
+          "sha256": "baa352e54bb08252153ecd6b451b1f20d434d4ec42f0b4912b5dfea36b6a8744",
+          "size_bytes": 4643
+        },
+        {
+          "path": "hardware/evaluate.py",
+          "blob_sha1": "866b4e7302de1d3486482fc2631c69c44a38131c",
+          "sha256": "e6b0bf779c254a71195009550272fcda9ca33da2097a4fcb1b9950dff2a95450",
+          "size_bytes": 25273
+        },
+        {
+          "path": "hardware/render_readme.py",
+          "blob_sha1": "33d648ad0b8d772a51d47677fc4e69830e6e5663",
+          "sha256": "60d2ac25ef4b045b33ea77829b85d746038ee936e4d8d311a5a18df8f8f8bcde",
+          "size_bytes": 23725
+        }
+      ],
+      "preserve_readonly": [],
+      "missing": [],
+      "observed_commit": "fad43a495abddb9029ef005d16a0909ca1de957c",
+      "observed_commit_date": "2026-09-23T22:22:13+08:00",
+      "observed_dirty": null,
+      "commit_matches_declared": true
+    },
+    {
+      "name": "AdaptiveSense",
+      "local_path": "/Users/mac/Documents/AdaptiveSense",
+      "exists": true,
+      "remote": "https://github.com/Sver0411/AdaptiveSense.git",
+      "declared_commit": "6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b",
+      "no_git_history": false,
+      "role_in_edgesense": "Adaptive Sampling Engine 策略本体 (S5 baseline) + 离线回放评测框架 + C/Python parity 方法论 + 逐通道 validity 契约",
+      "take": [
+        {
+          "path": "firmware/main/change_detector.c",
+          "blob_sha1": "bf94790c325aeffda74135d7c1ecda6aaef71afb",
+          "sha256": "416cf8b14e6ec7036d48634a5e59829a69c8fd5a80481ae460c05f0846ba4493",
+          "size_bytes": 7563
+        },
+        {
+          "path": "firmware/main/change_detector.h",
+          "blob_sha1": "45297620f521cbba8d9bdd973be3e10da79fd70e",
+          "sha256": "c11ab917c8e18069277d27b614d7766d3f33a4bb2e247dc79d6d7901ed46e2fc",
+          "size_bytes": 3613
+        },
+        {
+          "path": "firmware/main/adaptive_scheduler.c",
+          "blob_sha1": "cf1df374a330a1a1de1731c18c3a0cce3f430e18",
+          "sha256": "3703e376d3dcc6fb013ac7e035effd34350edc99afa1bc45bb0c17d6ee6ef505",
+          "size_bytes": 6627
+        },
+        {
+          "path": "firmware/main/adaptive_scheduler.h",
+          "blob_sha1": "a31ea1b21b01f3cd50503340c2a714051ffc4e3f",
+          "sha256": "8561fead06c3d9bac6ee1d39ab776700c19a9f004a344cbd4ef6b7919ed8f20b",
+          "size_bytes": 3307
+        },
+        {
+          "path": "firmware/main/sensor.c",
+          "blob_sha1": "eae3bb03a08b0a66288fc009528ba1c5097f025c",
+          "sha256": "e1f2c18c31a37b436bfbde50e16243197138a98000044a899d43dd7bc24188a9",
+          "size_bytes": 12632
+        },
+        {
+          "path": "firmware/main/sensor.h",
+          "blob_sha1": "4992ebb29f872780aa37d680cb0775d678c440a6",
+          "sha256": "b6e9fbc760fb560309d02640c3734656666efe5b0510617eaf5d0f49d114af00",
+          "size_bytes": 4817
+        },
+        {
+          "path": "firmware/main/sensor_backend.h",
+          "blob_sha1": "23a4f00deca4cdb40a47b9686a7cbf4cefe5edbc",
+          "sha256": "2fb07455ab5149b39494c9ea27069a16a3846715cb4f65264291e7a9ab0dfb41",
+          "size_bytes": 2076
+        },
+        {
+          "path": "firmware/main/sensor_bus.c",
+          "blob_sha1": "180b767788205d220f586c0263072275f4a6ad6a",
+          "sha256": "b5ccbdd3f97d0008da60c25343727a3b8b5e4878d3048a08cccdeb604e61d912",
+          "size_bytes": 6436
+        },
+        {
+          "path": "firmware/main/sensor_bus.h",
+          "blob_sha1": "f7a894f0e3735ae3f748ed5e1d3cf2d229c15e91",
+          "sha256": "473530aa98d31166f3f0f969662558ad84eac78ef24f073c76b2611cfdfb39f9",
+          "size_bytes": 1277
+        },
+        {
+          "path": "firmware/main/sensor_supervisor.c",
+          "blob_sha1": "0fdbddfad38b8234296a457d75922aef6a08f482",
+          "sha256": "37775cfb16213dda37014d080aa3e44ee6e1f0cc06f1b952f0999156a2cb9aa9",
+          "size_bytes": 3284
+        },
+        {
+          "path": "firmware/main/sensor_supervisor.h",
+          "blob_sha1": "9052c5e000a3f88e40264798f3a4c6c066143b19",
+          "sha256": "48819cb2d453ace01e609a1a1e19d4fad6595156d4333dc4a234ba4c5c443d99",
+          "size_bytes": 4482
+        },
+        {
+          "path": "firmware/main/sht30_proto.c",
+          "blob_sha1": "44f60fd17672ed1a58360da10728d11df0b41bbb",
+          "sha256": "fd4f19e596ab7aa8079714d8fddb50dc7e525e9b8d3eed8e5f63b45a79486d8c",
+          "size_bytes": 3368
+        },
+        {
+          "path": "firmware/main/sht30_proto.h",
+          "blob_sha1": "c97e583b534dde1001a89ed5a616433cfe2457e6",
+          "sha256": "f6cd34a8b8a90017cbfca0bace9a18a752ae454d56c64acb866fbfe7a5a342ca",
+          "size_bytes": 4060
+        },
+        {
+          "path": "firmware/main/bh1750_proto.c",
+          "blob_sha1": "6574f5f211d82471277f9a716e3771742fb1e26d",
+          "sha256": "a6acb333d579b9b547e32b8e2a77af2f71c04ecde4df1b3b6620facd0031a747",
+          "size_bytes": 3110
+        },
+        {
+          "path": "firmware/main/bh1750_proto.h",
+          "blob_sha1": "45bc0cebb2033f664b9dbb143ac74e8e59ffb186",
+          "sha256": "d8876152e3f078e1c25466d15aad0d2be7c3ef162cff63c5e6d814832bbf63dd",
+          "size_bytes": 9286
+        },
+        {
+          "path": "firmware/main/soil_moisture.c",
+          "blob_sha1": "18f0f4a63979aa937d0db72a15cb540b36a89c8d",
+          "sha256": "84bf1f0c5a391e95cfa8784b04c9ba304fc6f7ddc6f089d123aee67e29969869",
+          "size_bytes": 8786
+        },
+        {
+          "path": "firmware/main/soil_moisture.h",
+          "blob_sha1": "4bfc5a207f3e749390b67929e583ab6ea99b93fe",
+          "sha256": "d42e0399683fc64ff1b53cd0b8f2435ffa00d17d80b0f71db83deb2e3006d4f7",
+          "size_bytes": 3594
+        },
+        {
+          "path": "firmware/main/soil_moisture_math.c",
+          "blob_sha1": "ae3d252b2fee218d6a61f06f4a92cdb85d75700a",
+          "sha256": "0f387ca67f8fc9a083451628ee9512bdb19060ec1e6c9c924f83f7de0db24950",
+          "size_bytes": 3492
+        },
+        {
+          "path": "firmware/main/soil_moisture_math.h",
+          "blob_sha1": "b1dfcc7b0b5632e6e6df26872f3c283369585d33",
+          "sha256": "25945184ef28e556e9889fc2a8ccda276c6d80354e1dd65d603958543279eafd",
+          "size_bytes": 4129
+        },
+        {
+          "path": "firmware/main/sensor_sht30.c",
+          "blob_sha1": "5bd830aec65bdb3950ac1315892a0da755c3435a",
+          "sha256": "c0f60f2b5b058588f1d57cbab728d8fc0fd51cd29d0cfbd91758cc6b695c1385",
+          "size_bytes": 5812
+        },
+        {
+          "path": "firmware/main/sensor_bh1750.c",
+          "blob_sha1": "3e7f9709a377bee45bb9212c7431bd196e930d9b",
+          "sha256": "e0d993486792e65c2ce4e7a5d46dd420dafbea2c24fea69e0fdada633f8691ce",
+          "size_bytes": 5998
+        },
+        {
+          "path": "simulator/replay.py",
+          "blob_sha1": "725d66eb588013c176e117de80f178717ccaf72f",
+          "sha256": "9a9a0ee241b49c50d2cf00dcbe8e57d64688a36a3d1f352b4c27baef7ad51f64",
+          "size_bytes": 5591
+        },
+        {
+          "path": "simulator/metrics.py",
+          "blob_sha1": "e1f5bd40873944909614c87ca874e96393bfc378",
+          "sha256": "23ef11a6cd3c7a0849df6bf4e7e06124758623301449146cbebec9056052c18d",
+          "size_bytes": 10283
+        },
+        {
+          "path": "simulator/adaptive.py",
+          "blob_sha1": "fe911820af0371196ce25b1c214abbb016648c82",
+          "sha256": "12bb92dac735ed699c7aeac23b23823d7ab93be78917fe8de3c96cb7102b8661",
+          "size_bytes": 9973
+        },
+        {
+          "path": "simulator/scoring.py",
+          "blob_sha1": "42ada0930fcfb52b0d0108209cb3160127fadd61",
+          "sha256": "e914d6d81faff710b3599f5f45e6a7db333a5e8fe2e250519d00c5cfd21d0837",
+          "size_bytes": 7259
+        },
+        {
+          "path": "simulator/events.py",
+          "blob_sha1": "47bf9f30f1cb1d6bac86ba8208c898d8f85f4bc8",
+          "sha256": "66146c707b2989a8a42256c87c771fa3f2e4889b8b44c6ac512b44c5bcc4a8ce",
+          "size_bytes": 10616
+        },
+        {
+          "path": "simulator/config.py",
+          "blob_sha1": "a4386561909ae7a00f1fff5e78ef12459299bc24",
+          "sha256": "18f81c208466b6ffd5b9022939b122e7092ef4cb1656284a02620ecf897a14bd",
+          "size_bytes": 7821
+        },
+        {
+          "path": "simulator/fixed_sampling.py",
+          "blob_sha1": "1aad450e7ead8154c67c488983cd7c37d3ca7620",
+          "sha256": "aee4cdf08191a485a6e44d7d8d3dde65b0909e6a5d3eed7e05a664ea78a3edb5",
+          "size_bytes": 2023
+        },
+        {
+          "path": "scripts/check_config_parity.py",
+          "blob_sha1": "670e1c10a615719d39d0d6ecd368342600113145",
+          "sha256": "611f7a7bb7f214aeefe8c468574637d685c4ff2eafe21cae22b469477ac03315",
+          "size_bytes": 20658
+        },
+        {
+          "path": "tests/test_parity_python_c.py",
+          "blob_sha1": "8eb85171bc91aad67d76ab2f80cc6a891c45a730",
+          "sha256": "0c683dc0e71b7fd707ac1d5b875b3ecf172b8fc72d3ef85b1130586921b8abaa",
+          "size_bytes": 7956
+        },
+        {
+          "path": "tests/make_parity_fixture.py",
+          "blob_sha1": "9c45d595d1fe6f47b6ef813bb2e81554e4e3edae",
+          "sha256": "9c14970e2e511b57c4c2e3f83745cb733813c6937d4dedfa163811794257c2f6",
+          "size_bytes": 3196
+        },
+        {
+          "path": "tests/host_build.py",
+          "blob_sha1": "0b1f3dd129ac6d8f7419f530ad6eeaacd9c4e214",
+          "sha256": "3157d208cdb67ad38615b9753dc755b6a8e4e317b6f13c24a036d3661546030f",
+          "size_bytes": 4196
+        },
+        {
+          "path": "docs/change_score_spec.md",
+          "blob_sha1": "2c2f8da50c47538d3d0338f22b171430f2fb74e7",
+          "sha256": "ec8a264798aa68d1e27d11183f2dc5c689cc910a23ac8c4743d78aefb1e85d68",
+          "size_bytes": 14991
+        },
+        {
+          "path": "docs/methodology.md",
+          "blob_sha1": "4df2d73b2700300757d5c9987f5ea6d49c0774da",
+          "sha256": "d4c8772887bb7e6914f81a0a71ac49562e8f645cc4a9ae90df595edb84c00904",
+          "size_bytes": 9452
+        }
+      ],
+      "preserve_readonly": [],
+      "missing": [],
+      "observed_commit": "6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b",
+      "observed_commit_date": "2026-09-23T13:28:55+08:00",
+      "observed_dirty": null,
+      "commit_matches_declared": true
+    },
+    {
+      "name": "EventGuard-LoRa",
+      "local_path": "/Users/mac/Documents/ChatGPT/EventGuard-LoRa",
+      "exists": true,
+      "remote": "https://github.com/Sver0411/EventGuard-LoRa.git",
+      "declared_commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
+      "no_git_history": false,
+      "role_in_edgesense": "LoRa 传输层（CRC 帧 / 去重 / 流式解析 / 应用层故障注入）+ 实验编排与审计方法论。其研究问题（冗余预算）不复用",
+      "take": [
+        {
+          "path": "firmware/common/e220.c",
+          "blob_sha1": "18f46e2410c2bab44f138d3f5bec811b9fa16980",
+          "sha256": "ed5e737f940867cb90aea956e1c918e9d7595a9a20130be18d4105f836afe132",
+          "size_bytes": 14144
+        },
+        {
+          "path": "firmware/common/e220.h",
+          "blob_sha1": "96fec6a49682a7446410b4fba9a1184c07dd24ed",
+          "sha256": "81abeaf4c8b63a05993ec3c9c7606f48f24d8fc77609d13e01ca0c4189c37197",
+          "size_bytes": 1053
+        },
+        {
+          "path": "firmware/common/e220_stream_parser.c",
+          "blob_sha1": "4beabf71c2175ccdb7480e0367926bbe555f5485",
+          "sha256": "fe2f359f4ffb3c9ee88547ed084f4d2451393472023a34e642ff8d6bd86e8a5b",
+          "size_bytes": 5589
+        },
+        {
+          "path": "firmware/common/e220_stream_parser.h",
+          "blob_sha1": "02dd05acbf7c17a8ce90d1bd648f25dbc20256d8",
+          "sha256": "2107f0ba88a769f6b50ea321484d323ce442cbed629faf6dd990dc48eaf6029b",
+          "size_bytes": 1105
+        },
+        {
+          "path": "firmware/common/protocol.c",
+          "blob_sha1": "54098e2e7a13feac7a924ad785326de4c87ae2f5",
+          "sha256": "5cf9fc23477457d641ea27e5c12738e646fa2d4da6a46d938d62b83edbd91afe",
+          "size_bytes": 2913
+        },
+        {
+          "path": "firmware/common/protocol.h",
+          "blob_sha1": "ca9c80c2825efc545583d499536d67c8facede3e",
+          "sha256": "0c89a555539449c0e3beda56cc1de3f2a81eea58b97ce91c91c9516ceeee8665",
+          "size_bytes": 1073
+        },
+        {
+          "path": "firmware/common/faults.c",
+          "blob_sha1": "6ce5d6461177d62ab610853eb92a3e030dc0cbd5",
+          "sha256": "8366d31c29a8f2f927c468ef9b43cb61c29a228e87929d0b2b3db17c96e59129",
+          "size_bytes": 2968
+        },
+        {
+          "path": "firmware/common/faults.h",
+          "blob_sha1": "2aa635bb93eca9c2b13cebf067376057a1cb2328",
+          "sha256": "249da227ac84f80e9f8992872ea553ac07ab3d2e6cb43994cd1c57c9fe6248b5",
+          "size_bytes": 829
+        }
+      ],
+      "preserve_readonly": [],
+      "missing": [],
+      "observed_commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
+      "observed_commit_date": "2026-09-27T02:44:16+08:00",
+      "observed_dirty": true,
+      "commit_matches_declared": true
+    },
+    {
+      "name": "TinyEdgeBench",
+      "local_path": "/Users/mac/WorkBuddy/TinyEdgeBench",
+      "exists": true,
+      "remote": "https://github.com/Sver0411/TinyEdgeBench.git",
+      "declared_commit": "485494ef46445681027a5678a8ef87824625661c",
+      "no_git_history": false,
+      "role_in_edgesense": "边缘算法成本测量的方法论（编译后 ELF 段差值）。保持独立 companion repo，不进入运行时",
+      "take": [
+        {
+          "path": "benchmark/measure_flash.py",
+          "blob_sha1": "a793551e676aefdc505fd581efc740f11a5a8afc",
+          "sha256": "217957093f074dffe96d3e765662cb2788fae1b2fa33d46e00f05cf1ea151b38",
+          "size_bytes": 6926
+        },
+        {
+          "path": "benchmark/run_benchmark.py",
+          "blob_sha1": "5534d03e390123fa05b2371c5368119f986f0f6c",
+          "sha256": "2608fa4f646b0862309f3895dbd2942834b3ed3ec9ad384159209f227d9ad9ea",
+          "size_bytes": 6999
+        },
+        {
+          "path": "training/export_models.py",
+          "blob_sha1": "f020007b72c92341d0ce034990a2612a90b77e96",
+          "sha256": "aa193a4dce55b2e29efdd7c8e5fac43eae2e2a50d58b20045b23d8f0fe2d81b0",
+          "size_bytes": 8782
+        }
+      ],
+      "preserve_readonly": [],
+      "missing": [],
+      "observed_commit": "485494ef46445681027a5678a8ef87824625661c",
+      "observed_commit_date": "2026-09-16T01:34:43+08:00",
+      "observed_dirty": null,
+      "commit_matches_declared": true
+    },
+    {
+      "name": "adaptive-lora-iot",
+      "local_path": "/Users/mac/Documents/ChatGPT/paper/adaptive-lora-iot",
+      "exists": true,
+      "remote": null,
+      "declared_commit": null,
+      "no_git_history": true,
+      "role_in_edgesense": "系统基座（直接迁入并重构）：多传感器节点固件、LoRa DATA 帧、采集与物理事件标注流程、真实数据集",
+      "take": [
+        {
+          "path": "firmware/node_s/main/main.c",
+          "blob_sha1": "3cf8b29f69865fab0415a8a021a3a2fc8bd095ac",
+          "sha256": "51bb21308208e5cea3099a839f8b0a76e8dea2fff2aecc40a36f581d9ce2f660",
+          "size_bytes": 4843
+        },
+        {
+          "path": "firmware/node_s/main/sensors.c",
+          "blob_sha1": "81df609843ff44994a265c568aecbd4b33c02991",
+          "sha256": "db744e0cc3517384310af149db02a4e02e73aca819843fad283d6b1793bd63e5",
+          "size_bytes": 4581
+        },
+        {
+          "path": "firmware/node_s/main/sensors.h",
+          "blob_sha1": "89f29fa12bc5f8e616d24c53533a9649935dcf35",
+          "sha256": "b503cfa268b5b79d5b43f877e467a5a75fd2dab157bb13cf8b031a157cb39826",
+          "size_bytes": 287
+        },
+        {
+          "path": "firmware/node_s/main/adaptive_policy.c",
+          "blob_sha1": "fa2bdcff7ed29744d1f420b625a3ad3504076d2d",
+          "sha256": "aff39202149e54fb68f7005a45dd2aa60899220d42ae16bb96a7e57c25fca063",
+          "size_bytes": 2430
+        },
+        {
+          "path": "firmware/node_s/main/adaptive_policy.h",
+          "blob_sha1": "c301c5143034b118966dd91d66a867cd1f753b27",
+          "sha256": "8d6c34407a3c150c6ad832206b69d6a9b39778bf12e4cdfb2c263f1b990a17ec",
+          "size_bytes": 227
+        },
+        {
+          "path": "firmware/node_s/main/policy_config.h",
+          "blob_sha1": "701d67fbae6fcf2796c68e9a0d4b7b577ffc9e82",
+          "sha256": "0c4e28548d56007dba29d24002c5df4ff91d85e857b50b4abb7961d7d540bb40",
+          "size_bytes": 382
+        },
+        {
+          "path": "firmware/node_s/main/e220.c",
+          "blob_sha1": "43fe428db3d5f5026c9861ec82a544eaf7f68c7c",
+          "sha256": "0cdda0fc4bfdb24246137599d31039d9c5b5b3794590941961b26c5d22fd5a55",
+          "size_bytes": 3809
+        },
+        {
+          "path": "firmware/node_s/main/e220.h",
+          "blob_sha1": "bea588e1ca230f35cb01679254aeabed0bbc06d0",
+          "sha256": "df086ecb43e7af3c0d6715b4dcea65beeabfbd13e3a8973fbb9c03da00c0bc26",
+          "size_bytes": 299
+        },
+        {
+          "path": "firmware/node_g/main/main.c",
+          "blob_sha1": "d46ffa8cf7cfdc2f845207849855b675a76769a6",
+          "sha256": "014353af10f2483f9f20adabd2407714085f2b0c4bd41c66451129037297e3f6",
+          "size_bytes": 7769
+        },
+        {
+          "path": "firmware/node_g/main/e220.c",
+          "blob_sha1": "43fe428db3d5f5026c9861ec82a544eaf7f68c7c",
+          "sha256": "0cdda0fc4bfdb24246137599d31039d9c5b5b3794590941961b26c5d22fd5a55",
+          "size_bytes": 3809
+        },
+        {
+          "path": "firmware/node_g/main/e220.h",
+          "blob_sha1": "bea588e1ca230f35cb01679254aeabed0bbc06d0",
+          "sha256": "df086ecb43e7af3c0d6715b4dcea65beeabfbd13e3a8973fbb9c03da00c0bc26",
+          "size_bytes": 299
+        },
+        {
+          "path": "experiments/collect.py",
+          "blob_sha1": "68c4ac47f3dbf25432a417bc6e11bac9e19e4904",
+          "sha256": "d19910796ef968ac703777e5d1827d64e790b71f4a6d090ac8ff175398b0dfec",
+          "size_bytes": 5849
+        },
+        {
+          "path": "experiments/add_event.py",
+          "blob_sha1": "b6ec5b0221afcbb1a806a04d32cd2bffd41b156a",
+          "sha256": "6f4aa46c3896bba5d98b70db22c69035792648af24c5af53ec757b69b7af55d4",
+          "size_bytes": 922
+        },
+        {
+          "path": "docs/HARDWARE_REVIEW.md",
+          "blob_sha1": "98b39cff137f6de919dbae214425c941a95be429",
+          "sha256": "712464dbe14adcb0fcd72b3b6c02f5630997e91fb69e891175f4604b07abb0d0",
+          "size_bytes": 2601
+        },
+        {
+          "path": "EXPERIMENTS.md",
+          "blob_sha1": "b2c1125ea6f6d251b04686f31e61e2ae7a33c875",
+          "sha256": "9e4198fbfb90fdde30ed6c03a5ba7960a06eaa58c9bdaa4e9609e3af8ce60d63",
+          "size_bytes": 1476
+        },
+        {
+          "path": "REPRODUCIBILITY.md",
+          "blob_sha1": "d45a848c0e18a720d642260bad281d868c8a8c0d",
+          "sha256": "534faa05b3cf349abc826caec65387b977dd32b6937f7032533540a71a43a7be",
+          "size_bytes": 1664
+        }
+      ],
+      "preserve_readonly": [
+        {
+          "path": "data/raw/20260925-phase2-main.csv",
+          "sha256": "07950b7893575f3e994665b0fb2cec525f0304a245b2a816a5c619e9083b77d0",
+          "size_bytes": 10063
+        },
+        {
+          "path": "data/raw/20260925-phase2-main-events.csv",
+          "sha256": "6f5cfda1bc0798df0a104f73fed8157e5ddab32d711b24320c7dc227fb763553",
+          "size_bytes": 899
+        },
+        {
+          "path": "logs/20260925-phase2-main-serial.log",
+          "sha256": "4a55ed1290180958f76c0c679d675f180e693cd864ad9aab2b647365a70b9ba1",
+          "size_bytes": 14989
+        },
+        {
+          "path": "logs/20260925-gateway-phase2-boot.log",
+          "sha256": "f46c5526985323f7520309f0412bd5de46d83e496818f21232a5729b413f1fbf",
+          "size_bytes": 379
+        },
+        {
+          "path": "logs/20260925-node-s-phase2-probe.log",
+          "sha256": "2f3ebf178ada142c8e126f1e9d263258630dd3f871ca5744c7c19d7b53abaf1d",
+          "size_bytes": 612
+        }
+      ],
+      "missing": [],
+      "observed_commit": null,
+      "observed_commit_date": null,
+      "observed_dirty": true,
+      "commit_matches_declared": null
+    }
+  ]
+}

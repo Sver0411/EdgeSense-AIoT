@@ -1,0 +1,187 @@
+{
+  "_comment": "EdgeSense vendor freeze — declarative source of truth. Edit THIS file, then run scripts/vendor_manifest.py to regenerate docs/vendored/vendor_manifest.json. Do not hand-edit the generated manifest.",
+  "schema": 1,
+  "frozen_on": "2026-09-27",
+  "policy": {
+    "pin": "explicit commit per git upstream; content hashes when no git history exists",
+    "upstream_edits": "forbidden — EdgeSense never edits an upstream repo's internal code",
+    "vendoring_mechanism": "git subtree at the pinned commit (not submodule)"
+  },
+  "repos": [
+    {
+      "name": "SensorTrust",
+      "local_path": "/Users/mac/Documents/SensorTrust",
+      "remote": "https://github.com/Sver0411/SensorTrust.git",
+      "commit": "fad43a495abddb9029ef005d16a0909ca1de957c",
+      "commit_date": "2026-09-23T22:22:13+08:00",
+      "git_describe": "v0.1-7-gfad43a4",
+      "dirty": false,
+      "take": [
+        "core/sensor_trust.c",
+        "core/sensor_trust.h",
+        "firmware/main/fault_injector.c",
+        "firmware/main/fault_injector.h",
+        "firmware/main/sensor_reader.c",
+        "hardware/capture.py",
+        "hardware/evaluate.py",
+        "hardware/render_readme.py"
+      ],
+      "do_not_take": [
+        "firmware/main/experiment.c",
+        "firmware/main/main.c",
+        "results/",
+        "simulator/"
+      ],
+      "role_in_edgesense": "Sensor Reliability Engine 内核 + 单通道 baseline (B1) + 故障注入器 + 证据管线方法论"
+    },
+    {
+      "name": "AdaptiveSense",
+      "local_path": "/Users/mac/Documents/AdaptiveSense",
+      "remote": "https://github.com/Sver0411/AdaptiveSense.git",
+      "commit": "6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b",
+      "commit_date": "2026-09-23T13:28:55+08:00",
+      "git_describe": "6e0d086",
+      "dirty": false,
+      "take": [
+        "firmware/main/change_detector.c",
+        "firmware/main/change_detector.h",
+        "firmware/main/adaptive_scheduler.c",
+        "firmware/main/adaptive_scheduler.h",
+        "firmware/main/sensor.c",
+        "firmware/main/sensor.h",
+        "firmware/main/sensor_backend.h",
+        "firmware/main/sensor_bus.c",
+        "firmware/main/sensor_bus.h",
+        "firmware/main/sensor_supervisor.c",
+        "firmware/main/sensor_supervisor.h",
+        "firmware/main/sht30_proto.c",
+        "firmware/main/sht30_proto.h",
+        "firmware/main/bh1750_proto.c",
+        "firmware/main/bh1750_proto.h",
+        "firmware/main/soil_moisture.c",
+        "firmware/main/soil_moisture.h",
+        "firmware/main/soil_moisture_math.c",
+        "firmware/main/soil_moisture_math.h",
+        "firmware/main/sensor_sht30.c",
+        "firmware/main/sensor_bh1750.c",
+        "simulator/replay.py",
+        "simulator/metrics.py",
+        "simulator/adaptive.py",
+        "simulator/scoring.py",
+        "simulator/events.py",
+        "simulator/config.py",
+        "simulator/fixed_sampling.py",
+        "scripts/check_config_parity.py",
+        "tests/test_parity_python_c.py",
+        "tests/make_parity_fixture.py",
+        "tests/host_build.py",
+        "docs/change_score_spec.md",
+        "docs/methodology.md"
+      ],
+      "do_not_take": [
+        "firmware/main/communication.c",
+        "firmware/main/communication.h",
+        "firmware/main/communication_payload.c",
+        "firmware/main/power_mgmt.c",
+        "firmware/main/power_stats.c",
+        "firmware/main/sensor_bme280.c",
+        "firmware/main/bme280_math.c"
+      ],
+      "role_in_edgesense": "Adaptive Sampling Engine 策略本体 (S5 baseline) + 离线回放评测框架 + C/Python parity 方法论 + 逐通道 validity 契约"
+    },
+    {
+      "name": "EventGuard-LoRa",
+      "local_path": "/Users/mac/Documents/ChatGPT/EventGuard-LoRa",
+      "remote": "https://github.com/Sver0411/EventGuard-LoRa.git",
+      "commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
+      "commit_date": "2026-09-27T02:44:16+08:00",
+      "branch_at_freeze": "codex/public-repository-metadata",
+      "dirty": "paper/main.pdf modified; .DS_Store untracked (neither is in the freeze set)",
+      "transport_last_changed": "0b5b50d 2026-09-26T12:56:10+08:00 — 'Diagnose and fix E220 receive stream parser'",
+      "note": "Upstream is still receiving commits during our session. The freeze set (firmware/common + tools) is unaffected: firmware/common has no uncommitted changes and last changed 2026-09-26. Pin to this commit explicitly; never track upstream HEAD.",
+      "take": [
+        "firmware/common/e220.c",
+        "firmware/common/e220.h",
+        "firmware/common/e220_stream_parser.c",
+        "firmware/common/e220_stream_parser.h",
+        "firmware/common/protocol.c",
+        "firmware/common/protocol.h",
+        "firmware/common/faults.c",
+        "firmware/common/faults.h"
+      ],
+      "do_not_take": [
+        "firmware/common/importance.c",
+        "firmware/common/importance.h",
+        "firmware/common/strategy.c",
+        "firmware/common/strategy.h",
+        "firmware/common/sensor_drivers.c",
+        "firmware/common/sensor_drivers.h",
+        "paper/",
+        "results/"
+      ],
+      "role_in_edgesense": "LoRa 传输层（CRC 帧 / 去重 / 流式解析 / 应用层故障注入）+ 实验编排与审计方法论。其研究问题（冗余预算）不复用"
+    },
+    {
+      "name": "TinyEdgeBench",
+      "local_path": "/Users/mac/WorkBuddy/TinyEdgeBench",
+      "remote": "https://github.com/Sver0411/TinyEdgeBench.git",
+      "commit": "485494ef46445681027a5678a8ef87824625661c",
+      "commit_date": "2026-09-16T01:34:43+08:00",
+      "git_describe": "485494e",
+      "dirty": false,
+      "take": [
+        "benchmark/measure_flash.py",
+        "benchmark/run_benchmark.py",
+        "training/export_models.py"
+      ],
+      "do_not_take": [
+        "dataset/",
+        "training/train.py",
+        "results/"
+      ],
+      "role_in_edgesense": "边缘算法成本测量的方法论（编译后 ELF 段差值）。保持独立 companion repo，不进入运行时"
+    },
+    {
+      "name": "adaptive-lora-iot",
+      "local_path": "/Users/mac/Documents/ChatGPT/paper/adaptive-lora-iot",
+      "remote": null,
+      "commit": null,
+      "commit_date": null,
+      "no_git_history": true,
+      "note": "Its containing repo (~/Documents/ChatGPT/paper) has ZERO commits and adaptive-lora-iot/ is untracked. There is no source commit to record. Freeze is therefore content-hash based: the sha256 values in the generated manifest are the authoritative record. This directory is also the origin of EdgeSense's first real dataset.",
+      "take": [
+        "firmware/node_s/main/main.c",
+        "firmware/node_s/main/sensors.c",
+        "firmware/node_s/main/sensors.h",
+        "firmware/node_s/main/adaptive_policy.c",
+        "firmware/node_s/main/adaptive_policy.h",
+        "firmware/node_s/main/policy_config.h",
+        "firmware/node_s/main/e220.c",
+        "firmware/node_s/main/e220.h",
+        "firmware/node_g/main/main.c",
+        "firmware/node_g/main/e220.c",
+        "firmware/node_g/main/e220.h",
+        "experiments/collect.py",
+        "experiments/add_event.py",
+        "docs/HARDWARE_REVIEW.md",
+        "EXPERIMENTS.md",
+        "REPRODUCIBILITY.md"
+      ],
+      "do_not_take": [
+        "firmware/node_s/main/idf_component.yml",
+        "firmware/node_s/sdkconfig",
+        "firmware/node_g/sdkconfig",
+        "firmware/*/managed_components/"
+      ],
+      "preserve_readonly": [
+        "data/raw/20260925-phase2-main.csv",
+        "data/raw/20260925-phase2-main-events.csv",
+        "logs/20260925-phase2-main-serial.log",
+        "logs/20260925-gateway-phase2-boot.log",
+        "logs/20260925-node-s-phase2-probe.log"
+      ],
+      "preserve_note": "历史真实实验结果，禁止修改。若重新分析，必须作为新的 EXP 呈现并与原结果并列，不得覆盖。",
+      "role_in_edgesense": "系统基座（直接迁入并重构）：多传感器节点固件、LoRa DATA 帧、采集与物理事件标注流程、真实数据集"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_comment": "EXP-000 is the offline framework self-check. It has no hardware and no raw logs; it exists to prove analyze_experiment.py computes correct metrics on fixtures whose answers are known, and that it ERRORS OUT when a required truth category has zero episodes. Copy this directory to experiments/EXP-<id>/ for a real experiment and replace every TODO.",
+  "status": "template",
+  "exp_id": "EXP-000",
+  "title": "framework self-check on fixtures with known answers",
+  "date": null,
+
+  "hardware": {
+    "nodes": [],
+    "note": "EXP-000 is offline: no hardware is used"
+  },
+
+  "provenance": {
+    "fw_commit": null,
+    "config_sha256": null,
+    "vendor_manifest_generated_at": null
+  },
+
+  "sampling": {
+    "mode": "offline_fixture",
+    "interval_s": null,
+    "note": "Primary RQ experiments use a fixed dense 5 s cadence on both nodes"
+  },
+
+  "pairing_config": {
+    "window_s": null,
+    "max_sample_age_ms": null,
+    "note": "max_sample_age is NOT fixed in advance: EXP-004 measures offset/jitter/drift and then sets it"
+  },
+
+  "fault_taxonomy_version": "phase-0.2",
+
+  "input_mode": "offline_replay",
+
+  "dataset_reuse": {
+    "reuses_raw_dataset_of": null,
+    "allowed_reuse": ["fault family definitions", "injection plan", "injection parameters", "ground-truth semantics"],
+    "forbidden_reuse": ["any raw dataset"],
+    "note": "Reusing a single-node raw dataset for a multi-node conclusion is the F1 error. Read experiment_design.md section 6.1."
+  },
+
+  "n": {
+    "planned": null,
+    "actual": null,
+    "basis": "pilot variance estimate | power calculation | exploratory (state which, or write 'exploratory, no confirmatory claim')"
+  },
+
+  "statistics": {
+    "test": null,
+    "alpha": null,
+    "paired": null,
+    "multiplicity_correction": null,
+    "note": "Declare the test BEFORE collecting test data. Never choose it after seeing results."
+  },
+
+  "expected_event": null,
+
+  "status_values": ["template", "planned", "running", "complete", "aborted", "partial"]
+}
