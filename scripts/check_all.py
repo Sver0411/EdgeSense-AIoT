@@ -49,7 +49,11 @@ def build_checks() -> list[Check]:
     return [
         Check(
             name="vendor integrity",
-            command=[py, "scripts/vendor_manifest.py", "--verify"],
+            # --require-upstream makes a missing upstream checkout a failure. That is
+            # the right standard for a complete local sweep; CI uses the same script
+            # without it, because a runner has no upstream checkouts and a red build
+            # caused by the environment would be noise, not signal.
+            command=[py, "scripts/vendor_manifest.py", "--verify", "--require-upstream"],
             cwd=REPO_ROOT,
         ),
         Check(

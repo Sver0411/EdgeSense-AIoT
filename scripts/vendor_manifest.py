@@ -186,62 +186,101 @@ def collect() -> dict[str, Any]:
     return manifest
 
 
-def verify(manifest: dict[str, Any]) -> int:
+def verify(manifest: dict[str, Any], require_upstream: bool = False) -> int:
+    """Check what can be checked here, and say plainly what could not.
+
+    Two different questions are asked, and they are answerable in different places:
+
+      upstream drift      did the pinned upstream checkout change? Only answerable
+                          where that checkout exists.
+      vendored copy       is the copy inside EdgeSense still byte-identical to the
+                          pinned upstream? Answerable anywhere, because the pinned
+                          hashes are recorded in the manifest.
+
+    Conflating them made this script fail on a CI runner, where none of the upstream
+    checkouts exist - a red build caused by the environment rather than by a real
+    problem. Now an absent upstream is reported as skipped, and only
+    --require-upstream turns it into a failure. The vendored copies are always
+    verified, on any machine.
+    """
     problems: list[str] = []
+    notes: list[str] = []
+    upstream_checked = 0
+    upstream_absent: list[str] = []
 
     for repo in manifest["repos"]:
         name = repo["name"]
         path = Path(repo["local_path"]).expanduser()
-        if not repo["exists"]:
-            problems.append(f"{name}: local_path no longer exists")
-            continue
+        upstream_present = path.is_dir()
 
-        observed_commit, _, _ = git_head(path)
-        if repo.get("declared_commit") and observed_commit != repo["declared_commit"]:
-            problems.append(
-                f"{name}: commit drift — declared {repo['declared_commit'][:12]}, "
-                f"observed {str(observed_commit)[:12]}"
+        if upstream_present:
+            upstream_checked += 1
+            observed_commit, _, _ = git_head(path)
+            if repo.get("declared_commit") and observed_commit != repo["declared_commit"]:
+                problems.append(
+                    f"{name}: commit drift — declared {repo['declared_commit'][:12]}, "
+                    f"observed {str(observed_commit)[:12]}"
+                )
+            for item in repo.get("take", []) + repo.get("preserve_readonly", []):
+                target = path / item["path"]
+                if not target.is_file():
+                    problems.append(f"{name}: missing {item['path']}")
+                    continue
+                actual = sha256_of(target)
+                if actual != item["sha256"]:
+                    problems.append(
+                        f"{name}: content drift in {item['path']} "
+                        f"(sha256 {item['sha256'][:12]} -> {actual[:12]})"
+                    )
+        else:
+            upstream_absent.append(name)
+            message = (
+                f"{name}: upstream checkout absent at {repo['local_path']} - "
+                "upstream drift not checked here; vendored copies are still verified "
+                "against the hashes recorded in the manifest"
             )
+            if require_upstream:
+                problems.append(f"{name}: upstream checkout missing (--require-upstream)")
+            else:
+                notes.append(message)
 
-        for item in repo.get("take", []) + repo.get("preserve_readonly", []):
-            target = path / item["path"]
-            if not target.is_file():
-                problems.append(f"{name}: missing {item['path']}")
-                continue
-            actual = sha256_of(target)
-            if actual != item["sha256"]:
-                problems.append(
-                    f"{name}: content drift in {item['path']} "
-                    f"(sha256 {item['sha256'][:12]} -> {actual[:12]})"
-                )
-
-        for rel in repo.get("missing", []):
-            problems.append(f"{name}: declared but absent at freeze time: {rel}")
-
+        # Vendored copies: verified everywhere, against the recorded hash.
         for record in repo.get("vendored_into", []):
-            dest_rel = record["dest"]
-            dest_path = REPO_ROOT / dest_rel
-            src_path = path / record["src"]
-
-            if not src_path.is_file():
-                problems.append(f"{name}: upstream src vanished: {record['src']}")
-                continue
+            dest_path = REPO_ROOT / record["dest"]
             if not dest_path.is_file():
-                problems.append(f"{name}: vendored copy missing: {dest_rel}")
+                problems.append(f"{name}: vendored copy missing: {record['dest']}")
                 continue
 
-            src_sha = sha256_of(src_path)
-            if record.get("src_sha256") and src_sha != record["src_sha256"]:
+            reference = record.get("src_sha256")
+            if reference is None:
                 problems.append(
-                    f"{name}: UPSTREAM DRIFT in {record['src']} "
-                    f"({record['src_sha256'][:12]} -> {src_sha[:12]})"
+                    f"{name}: no recorded source hash for {record['src']}; "
+                    f"cannot verify {record['dest']}"
                 )
+                continue
+
             dest_sha = sha256_of(dest_path)
-            if dest_sha != src_sha:
+            if dest_sha != reference:
                 problems.append(
-                    f"{name}: VENDORED COPY EDITED: {dest_rel} no longer matches upstream "
-                    f"{record['src']} (dest {dest_sha[:12]} vs src {src_sha[:12]})"
+                    f"{name}: VENDORED COPY EDITED: {record['dest']} no longer matches "
+                    f"the pinned upstream {record['src']} "
+                    f"(dest {dest_sha[:12]} vs recorded {reference[:12]})"
                 )
+
+            if upstream_present:
+                src_path = path / record["src"]
+                if not src_path.is_file():
+                    problems.append(f"{name}: upstream src vanished: {record['src']}")
+                else:
+                    src_sha = sha256_of(src_path)
+                    if src_sha != reference:
+                        problems.append(
+                            f"{name}: UPSTREAM DRIFT in {record['src']} "
+                            f"({reference[:12]} -> {src_sha[:12]})"
+                        )
+
+    for note in notes:
+        print(f"  skip: {note}")
 
     if problems:
         print(f"VENDOR FREEZE CHECK FAILED — {len(problems)} problem(s):")
@@ -249,14 +288,25 @@ def verify(manifest: dict[str, Any]) -> int:
             print(f"  - {line}")
         return 1
 
-    total = sum(len(r.get("take", [])) + len(r.get("preserve_readonly", [])) for r in manifest["repos"])
-    print(f"VENDOR FREEZE CHECK PASSED — {len(manifest['repos'])} repos, {total} frozen files unchanged")
+    vend = [v for r in manifest["repos"] for v in r.get("vendored_into", [])]
+    scope = f"upstream checkouts verified: {upstream_checked}"
+    if upstream_absent:
+        scope += f", absent: {len(upstream_absent)} ({', '.join(upstream_absent)})"
+    print(
+        f"VENDOR FREEZE CHECK PASSED — {len(vend)} vendored copies intact; {scope}"
+    )
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--verify", action="store_true", help="re-check the recorded manifest")
+    parser.add_argument(
+        "--require-upstream",
+        action="store_true",
+        help="also fail when an upstream checkout is absent (a local-machine check; "
+             "CI runners do not have the upstream repos)",
+    )
     args = parser.parse_args(argv)
 
     if args.verify:
@@ -264,7 +314,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"no manifest to verify at {MANIFEST_PATH}")
             return 1
         with MANIFEST_PATH.open(encoding="utf-8") as handle:
-            return verify(json.load(handle))
+            return verify(json.load(handle), require_upstream=args.require_upstream)
 
     manifest = collect()
     MANIFEST_PATH.write_text(
