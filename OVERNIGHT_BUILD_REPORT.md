@@ -315,14 +315,39 @@ and exit 1. Restoring the file made it pass again.
 
 ## 14. CI Status
 
-`.github/workflows/checks.yml` added: a `non-hardware-checks` job (vendor integrity,
+`.github/workflows/checks.yml` — a `non-hardware-checks` job (vendor integrity,
 config parity, host C tests, Python tests, EXP-000, static checks) and a separate
-`firmware-build` job using `espressif/esp-idf-ci-action@v1` with ESP-IDF v5.4.4 and
+`firmware-build` job using `espressif/esp-idf-ci-action@v1` with ESP-IDF v5.4.4,
 target esp32s3.
 
-**Not verified.** CI has never run — the repository has no remote and nothing has been
-pushed. The workflow is written, not exercised. The ESP-IDF step in particular is
-unverified: it worked locally with a different invocation. **No green tick is claimed.**
+**Status at the time of writing: both jobs pass.** Two runs occurred, and the first
+one is the interesting one.
+
+**Run 1 — failed, and that was the point.** `non-hardware checks` failed at
+`vendor integrity`; every later step was skipped. The cause was a real defect in the
+verification script, not in the repository: it asked two different questions as one.
+
+| Question | Where it is answerable |
+|---|---|
+| Did the pinned upstream checkout drift? | Only on a machine that has those checkouts |
+| Is the vendored copy inside EdgeSense still byte-identical? | Anywhere, using the hashes recorded in the manifest |
+
+The runner has no upstream checkouts, so all five were reported as failures. A red
+build caused by the environment is noise, and noise trains people to ignore red.
+
+**Run 2 — both jobs pass**, after the script was rewritten so an absent upstream is
+reported as *skipped* with an explicit note, while the vendored copies are always
+verified. The summary line states how many upstream checkouts were actually verified,
+so a green run cannot be read as more than it is. `--require-upstream` restores the
+strict behaviour for a complete local sweep, and is what `check_all.py` uses.
+
+**The unplanned benefit:** run 1's `firmware build (esp32s3)` job **succeeded on a
+clean Ubuntu runner**. That is independent confirmation the build is not an artefact
+of this macOS machine — something a local build could never establish.
+
+The workflow carries the sentence "this step proves the firmware compiles for the
+target. Nothing here is flashed, and no hardware claim follows from it." That remains
+true of the green run.
 
 ## 15. Phase 1A Checklist
 
@@ -384,7 +409,8 @@ continuous run, an unplug test — are **blocked**, not done, and are listed in 
    fixed-size frames; it would need rework for variable-length frames.
 5. **`main.c` never transmits and never samples adaptively.** It is a boot smoke path,
    and says so.
-6. **The CI workflow has never executed** (§14).
+6. ~~The CI workflow has never executed.~~ **Resolved during publication:** it ran,
+   failed on a real defect in the vendor check, was fixed, and now passes. See §14.
 7. **`test_host.sh` links every object into every test binary.** Harmless today; it
    would hide a missing-symbol error in a future suite.
 8. **The static checker's exemptions are path-based and manual.** If a checker is
@@ -423,6 +449,10 @@ These are safe to put in a README, an application, or an interview, as written.
   expected confusion matrix and metrics were derived by counting."
 - "Ground truth and system decisions are stored separately, and no firmware source
   contains ground-truth vocabulary — checked automatically."
+- "CI passes on a clean runner: vendor integrity, config parity, host C tests, Python
+  tests, the EXP-000 self-check, static checks, and an ESP-IDF v5.4.4 build for esp32s3."
+- "The firmware build is reproducible on Linux as well as macOS — the esp32s3 build job
+  succeeds on a clean Ubuntu runner."
 
 ## 20. Claims Not Yet Allowed
 
@@ -441,7 +471,8 @@ Listed because each of these is the next step someone would be tempted to write 
 | "The protocol works over the LoRa link" | The codec is host-tested; no frame has crossed a radio |
 | "Link reliability is high / packet loss is zero" | One prior 600.985 s point-to-point observation exists and describes only that run |
 | "Energy consumption is reduced" | Current was never measured. Only a UART-time proxy is defined, and it has not been computed |
-| "CI passes" | The workflow has never run |
+| "CI passes" | ~~Never run~~ — now true, see §14. Kept here as a reminder that it
+  was not true when first written |
 | "Suitable for deployment in Japan" | No regulatory or band verification has been done |
 
 ## 21. Next Recommended Action

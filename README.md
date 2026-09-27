@@ -2,8 +2,14 @@
 
 **Fault-Aware Adaptive Sensing and AI-Assisted Diagnosis for Resource-Constrained IoT Networks**
 
-> **Status: Phase 0 design frozen. No runtime code yet, no results yet.**
-> Every performance number in this README is deliberately absent. Nothing here has been measured under this project.
+[![checks](https://github.com/Sver0411/EdgeSense-AIoT/actions/workflows/checks.yml/badge.svg)](https://github.com/Sver0411/EdgeSense-AIoT/actions/workflows/checks.yml)
+
+> **Status: Phase 1A software foundation built and verified off-device.**
+> Per-channel sensor validity, the availability state mapping, the node roster and
+> Protocol v1 exist, pass 530 host assertions and 21 Python tests, and build for
+> ESP32-S3. **Nothing has been flashed or measured.** No experiment has produced a
+> result, so there are no performance numbers in this README — see the capability
+> table below for exactly what is and is not verified.
 
 ---
 
