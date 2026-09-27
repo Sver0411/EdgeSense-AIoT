@@ -133,4 +133,14 @@ Every number reported anywhere in this project must be traceable to an `experime
 
 ## License
 
-See `LICENSE` (to be added with the first code commit).
+**No license has been chosen yet.** Absent a licence file, the default applies: all
+rights reserved, and nothing here is licensed for reuse.
+
+This is deliberate rather than an oversight — picking a licence is the author's
+decision, and an earlier draft of this README referred to a `LICENSE` file that did
+not exist. If reuse is intended, add one (MIT and Apache-2.0 are the usual choices
+for a portfolio project); until then, treat the code as viewable, not reusable.
+
+Third-party code is unaffected by the above. The vendored files under
+`firmware/common/vendor/` remain under their own upstream licences, and each
+provenance record in `docs/vendored/` names its source and pinned commit.

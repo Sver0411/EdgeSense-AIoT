@@ -155,7 +155,7 @@ def check_upstreams(section: Section) -> None:
     with VENDOR_SOURCES.open(encoding="utf-8") as handle:
         sources = json.load(handle)
     for repo in sources["repos"]:
-        path = Path(repo["local_path"])
+        path = Path(repo["local_path"]).expanduser()
         if not path.is_dir():
             section.add("missing", repo["name"], f"upstream path absent: {path}")
             continue

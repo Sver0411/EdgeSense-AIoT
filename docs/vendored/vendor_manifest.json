@@ -1,12 +1,12 @@
 {
   "schema": 1,
-  "generated_at": "2026-09-26T19:14:08+00:00",
+  "generated_at": "2026-09-27T12:44:42+00:00",
   "frozen_on": "2026-09-27",
   "generator": "scripts/vendor_manifest.py",
   "repos": [
     {
       "name": "SensorTrust",
-      "local_path": "/Users/mac/Documents/SensorTrust",
+      "local_path": "~/Documents/SensorTrust",
       "exists": true,
       "remote": "https://github.com/Sver0411/SensorTrust.git",
       "declared_commit": "fad43a495abddb9029ef005d16a0909ca1de957c",
@@ -72,7 +72,7 @@
     },
     {
       "name": "AdaptiveSense",
-      "local_path": "/Users/mac/Documents/AdaptiveSense",
+      "local_path": "~/Documents/AdaptiveSense",
       "exists": true,
       "remote": "https://github.com/Sver0411/AdaptiveSense.git",
       "declared_commit": "6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b",
@@ -463,7 +463,7 @@
     },
     {
       "name": "EventGuard-LoRa",
-      "local_path": "/Users/mac/Documents/ChatGPT/EventGuard-LoRa",
+      "local_path": "~/Documents/ChatGPT/EventGuard-LoRa",
       "exists": true,
       "remote": "https://github.com/Sver0411/EventGuard-LoRa.git",
       "declared_commit": "f7b6e44597abe958d7e9d6d481265d0fae33b749",
@@ -602,7 +602,7 @@
     },
     {
       "name": "TinyEdgeBench",
-      "local_path": "/Users/mac/WorkBuddy/TinyEdgeBench",
+      "local_path": "~/WorkBuddy/TinyEdgeBench",
       "exists": true,
       "remote": "https://github.com/Sver0411/TinyEdgeBench.git",
       "declared_commit": "485494ef46445681027a5678a8ef87824625661c",
@@ -638,7 +638,7 @@
     },
     {
       "name": "adaptive-lora-iot",
-      "local_path": "/Users/mac/Documents/ChatGPT/paper/adaptive-lora-iot",
+      "local_path": "~/Documents/ChatGPT/paper/adaptive-lora-iot",
       "exists": true,
       "remote": null,
       "declared_commit": null,

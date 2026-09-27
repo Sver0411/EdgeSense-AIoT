@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | remote | `https://github.com/Sver0411/EventGuard-LoRa.git` |
-| local path | `/Users/mac/Documents/ChatGPT/EventGuard-LoRa` |
+| local path | `~/Documents/ChatGPT/EventGuard-LoRa` |
 | **pinned commit** | `f7b6e44597abe958d7e9d6d481265d0fae33b749` |
 | commit date | 2026-09-27T02:44:16+08:00 |
 | 冻结时所在分支 | `codex/public-repository-metadata` |

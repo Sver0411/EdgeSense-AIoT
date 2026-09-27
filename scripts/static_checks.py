@@ -32,10 +32,10 @@ SOURCE_SUFFIXES = {".c", ".h", ".py", ".sh", ".yaml", ".yml", ".json", ".ini", "
 
 # Documentation legitimately quotes machine paths; data files record where an
 # upstream checkout lives. Nothing else may.
-ABSOLUTE_PATH_ALLOWLIST = {
-    "docs/vendored/vendor_sources.json",
-}
-ABSOLUTE_PATH_SCOPES = ("firmware", "scripts", "experiments", "config", "tests")
+# Empty on purpose: no committed file should need a machine-specific path. The
+# vendored provenance records use "~/..." and the tooling expands it.
+ABSOLUTE_PATH_ALLOWLIST: set[str] = set()
+ABSOLUTE_PATH_SCOPES = ("firmware", "scripts", "experiments", "config", "tests", "docs")
 
 # The checkers themselves necessarily contain the patterns they search for — a
 # TODO sweep that flags its own regular expression is a check that can never pass,

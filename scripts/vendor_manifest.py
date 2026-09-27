@@ -106,7 +106,7 @@ def collect() -> dict[str, Any]:
 
     for repo in sources["repos"]:
         name = repo["name"]
-        path = Path(repo["local_path"])
+        path = Path(repo["local_path"]).expanduser()
         entry: dict[str, Any] = {
             "name": name,
             "local_path": repo["local_path"],
@@ -191,7 +191,7 @@ def verify(manifest: dict[str, Any]) -> int:
 
     for repo in manifest["repos"]:
         name = repo["name"]
-        path = Path(repo["local_path"])
+        path = Path(repo["local_path"]).expanduser()
         if not repo["exists"]:
             problems.append(f"{name}: local_path no longer exists")
             continue

@@ -55,5 +55,8 @@ experiments/**/raw/*
 *.swp
 
 # ---- local agent workspace (NOT a cache: keep the files, ignore nothing) ----
-# .workbuddy/ holds project memory and must be committed except transient state.
-.workbuddy/**/*.tmp
+# .workbuddy/ holds this workspace's agent memory: internal working notes,
+# including assessments of other projects and local environment details. It stays
+# on disk and out of the repository. The folder is NOT a cache and is never
+# deleted; it is simply not published.
+.workbuddy/

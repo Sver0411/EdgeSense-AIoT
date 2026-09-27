@@ -8,7 +8,7 @@
 | 项 | 值 |
 |---|---|
 | remote | `https://github.com/Sver0411/SensorTrust.git` |
-| local path | `/Users/mac/Documents/SensorTrust` |
+| local path | `~/Documents/SensorTrust` |
 | **pinned commit** | `fad43a495abddb9029ef005d16a0909ca1de957c` |
 | commit date | 2026-09-23T22:22:13+08:00 |
 | describe | `v0.1-7-gfad43a4` |

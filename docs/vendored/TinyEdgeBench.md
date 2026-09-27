@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | remote | `https://github.com/Sver0411/TinyEdgeBench.git` |
-| local path | `/Users/mac/WorkBuddy/TinyEdgeBench` |
+| local path | `~/WorkBuddy/TinyEdgeBench` |
 | **pinned commit** | `485494ef46445681027a5678a8ef87824625661c` |
 | commit date | 2026-09-16T01:34:43+08:00 |
 | dirty at freeze | 否 |

@@ -6,8 +6,8 @@
 
 | 项 | 值 |
 |---|---|
-| local path | `/Users/mac/Documents/ChatGPT/paper/adaptive-lora-iot` |
-| 所属 git 仓库 | `/Users/mac/Documents/ChatGPT/paper` |
+| local path | `~/Documents/ChatGPT/paper/adaptive-lora-iot` |
+| 所属 git 仓库 | `~/Documents/ChatGPT/paper` |
 | **该 git 仓库的提交数** | **0（`No commits yet`）** |
 | `adaptive-lora-iot/` 是否被跟踪 | **否（untracked）** |
 | remote | 无 |

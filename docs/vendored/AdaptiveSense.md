@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | remote | `https://github.com/Sver0411/AdaptiveSense.git` |
-| local path | `/Users/mac/Documents/AdaptiveSense` |
+| local path | `~/Documents/AdaptiveSense` |
 | **pinned commit** | `6e0d086cf14c81d2fb5dba8305e13a7dff2dae3b` |
 | commit date | 2026-09-23T13:28:55+08:00 |
 | dirty at freeze | 否 |
