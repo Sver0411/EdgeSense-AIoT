@@ -1,152 +1,130 @@
-# EdgeSense
+<h1 align="center">EdgeSense-AIoT</h1>
 
-**Fault-Aware Adaptive Sensing and AI-Assisted Diagnosis for Resource-Constrained IoT Networks**
+<p align="center"><strong>Fault-Aware Adaptive Sensing and IoT Diagnosis Research</strong></p>
 
-[![checks](https://github.com/Sver0411/EdgeSense-AIoT/actions/workflows/checks.yml/badge.svg)](https://github.com/Sver0411/EdgeSense-AIoT/actions/workflows/checks.yml)
-
-> **Status: Phase 1A software foundation built and verified off-device.**
-> Per-channel sensor validity, the availability state mapping, the node roster and
-> Protocol v1 exist, pass 530 host assertions and 21 Python tests, and build for
-> ESP32-S3. **Nothing has been flashed or measured.** No experiment has produced a
-> result, so there are no performance numbers in this README — see the capability
-> table below for exactly what is and is not verified.
+<p align="center">Sensor Trust · Cross-Node Evidence · Reproducible Experiments</p>
 
 ---
 
-## Research scope
+<p align="center">
+  <a href="#project-overview">Overview</a> ·
+  <a href="#research-method-and-architecture">Method &amp; Architecture</a> ·
+  <a href="#implementation-and-verification-status">Status</a> ·
+  <a href="#relationship-to-smart-agriculture-edge-ai">Related System</a> ·
+  <a href="README.zh-CN.md">简体中文</a>
+</p>
 
-| Type | Question |
-|---|---|
-| **Primary RQ** | Can fusion of within-node cross-channel evidence and across-node (redundant neighbour) evidence distinguish a **single-node sensor fault** from a **spatially shared environmental event**, compared with single-channel readings, and what trade-off does it introduce in shared-event recall? |
-| **Secondary RQ** | Does trust-aware adaptive sampling reduce false alarms and resource use, and what does it change about shared-event recall? |
+---
 
-**Not research contributions**: the AI diagnosis copilot, the dashboard, and the backend. They are the engineering layer.
-**Not attempted in v1**: telling a *localized* environmental event apart from a sensor fault — with only two witness nodes these are not separable in principle, so this is stated as a limitation rather than claimed.
+<a id="project-overview"></a>
 
-## What EdgeSense is, structurally
+EdgeSense-AIoT studies how sensor trust and evidence from multiple channels and nearby nodes can distinguish a sensor fault from a shared environmental change. It targets ESP32-S3 / E220 LoRa networks, with trust-aware sampling and evidence-based, AI-assisted diagnosis as planned extensions.
 
+**Current status: Phase 1A software foundation, verified off-device.** Per-channel validity, sensor availability mapping, node configuration, Protocol v1, and the offline evaluation framework are implemented. The sensor-node firmware builds, but has not been flashed or run on an ESP32-S3; fusion, adaptive sampling, and the diagnosis interface are not yet integrated.
+
+## Research questions
+
+- **Primary:** Can within-node cross-channel context and across-node evidence distinguish a single-node sensor fault from a spatially shared environmental event, compared with single-channel readings? What tradeoff does this introduce in shared-event recall?
+- **Secondary:** How does trust-aware adaptive sampling change false alarms, resource use, and shared-event recall?
+
+The study does not assume fusion or trust-aware sampling will improve every case. A localized event affecting only one witness node is outside the primary claim: with two witnesses, it can be indistinguishable from a sensor fault. The dashboard, backend, and AI copilot are planned engineering interfaces, not research contributions.
+
+## Research method and architecture
+
+The frozen design separates three responsibilities:
+
+1. **Node-local sensing and trust:** preserve validity per channel, apply the single-channel baseline, and add cross-channel context. Sampling consumes only local evidence, so it does not require a neighbour's readings.
+2. **Gateway fusion:** align node timestamps, form fusion windows, and pair fresh samples before comparing nodes. Sequence-number equality is not time synchronization; partial evidence and insufficient alignment are explicit outcomes.
+3. **Evidence and diagnosis:** persist observations and decisions in the backend. The planned dashboard and copilot expose read-only evidence and explanations; these access restrictions are design requirements, not implemented capabilities.
+
+**Planned architecture — the status table below shows which parts currently exist:**
+
+```text
+Sensor B ─┐  local: sensing → per-channel validity → SensorTrust
+          │         → cross-channel context → adaptive sampling → LoRa
+Sensor C ─┤  B/C: same planned firmware, co-located 30–50 cm apart
+          ▼
+      Gateway A: sessions → time alignment → cross-node fusion → decision
+          │
+      serial uplink
+          ▼
+      Backend: persistence + read-only API → Dashboard / AI Copilot
 ```
-Sensor Node B ─┐   node-local loop: sensing → per-channel validity → SensorTrust
-Sensor Node C ─┼─▶  → cross-channel context → local change → adaptive sampling → LoRa
-   (co-located, │
-    30–50 cm)   │   cross-node fusion does NOT happen here: a star-topology node
-               │   has no path to a neighbour's readings
-               ▼
-          Gateway A   session mgmt · beacon · timestamp alignment · cross-node fusion
-                      · final decision · evidence aggregation · link quality
-               │
-          serial uplink
-               ▼
-            Backend (FastAPI + PostgreSQL)   read-only API · persistence · observability
-               ▼
-        Dashboard + read-only Copilot
-```
 
-**The copilot is read-only by construction, not by convention**: the tool list has no write operations, the API exposes only `GET`, and the database is written only by the gateway ingest path. A contract test fails if a writing tool ever appears.
+Cross-node fusion belongs on Gateway A; the star-topology sensor nodes do not receive neighbour readings. The primary comparison uses fixed dense sampling to separate fusion effects from sampling effects. Adaptive experiments additionally report pairing coverage. See the [frozen design](docs/PHASE_0_2_FINAL_DESIGN_FREEZE.md), [architecture map](docs/engineering/architecture.md), and [experiment protocol](docs/research/experiment_design.md).
 
-## What exists, and how far each part is verified
+## Implementation and verification status
 
-The verification ladder is used strictly. **A lower rung is never reported as a higher one.**
+| Capability | Current evidence | Remaining work |
+| --- | --- | --- |
+| Per-channel validity, availability states, driver/frame mapping | Implemented, host-tested, included in firmware build | Physical sensor validation |
+| B/C node roster and configuration parity | Implemented, host-tested, included in firmware build | Two-node hardware verification |
+| Protocol v1 codec and stream parser | Implemented, host-tested, included in firmware build | Integration with the physical radio path |
+| I²C sensing adapter | Integrated with the vendored sensor layer; build-verified | Wiring checks and real reads under this firmware |
+| Offline analysis and EXP-000 | Implemented; checked against a synthetic fixture | Research datasets and evaluated policies |
+| LoRa transport, SensorTrust, adaptive sampling | Designed; not integrated into the current firmware | Integration and hardware evaluation |
+| Cross-channel context / gateway cross-node fusion | Designed; not implemented | Implementation, alignment tests, paired experiments |
+| Backend, dashboard, AI copilot | Designed; not implemented | Engineering implementation and read-only contracts |
 
-> `designed` → `implemented` → `host-tested` → `firmware-built` → `hardware-tested` → `hardware-validated` → `experimentally-evaluated`
+The recorded firmware build uses ESP-IDF v5.4.4. **Build success is not hardware validation.** Sensor availability describes whether channels can provide readings; it does not establish their trustworthiness. Hardware configuration is documented but unverified for EdgeSense, and the second SHT30 + BH1750 set remains a recorded prerequisite for two-node experiments. See [build evidence](docs/engineering/build.md), [wiring and hardware prerequisites](docs/hardware/wiring.md), and the [Phase 1A report](OVERNIGHT_BUILD_REPORT.md).
 
-| Capability | designed | implemented | host-tested | firmware-built | hardware-validated |
-|---|:--:|:--:|:--:|:--:|:--:|
-| Per-channel validity (frame contract) | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Sensor availability state (healthy/degraded/unavailable/retry_wait/recovering) | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Driver-report → frame mapping policies | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Node roster and configuration parity (B/C symmetry) | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Protocol v1 codec + stream parser | ✅ | ✅ | ✅ | ✅ | ❌ |
-| I2C bring-up via the vendored sensor layer | ✅ | ✅ | n/a (device-only) | ✅ | ❌ |
-| Offline evaluation framework + metric refusals | ✅ | ✅ | ✅ | n/a | n/a |
-| EXP-000 framework self-check | ✅ | ✅ | ✅ | n/a | n/a |
-| LoRa transport integration | ✅ | ❌ | ❌ | ❌ | ❌ |
-| SensorTrust integration | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Adaptive sampling (S5/S6) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Cross-channel fusion (B2) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Cross-node fusion (B3, gateway) | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Backend, dashboard, copilot | ✅ | ❌ | ❌ | n/a | ❌ |
+## Evaluation status and boundaries
 
-**No ESP32-S3 has been flashed with this firmware.** The build is verified; the
-hardware is not. See `docs/engineering/build.md` for the exact toolchain, artifact
-sizes and the one vendored warning, and `docs/hardware/wiring.md` for what is
-documented versus verified.
+**No research-performance or EdgeSense hardware results are available yet.** [EXP-000](experiments/EXP-000/results/analysis/report.md) is a synthetic fixture that verifies analysis calculations, not evidence of a working fault/event classifier. Cross-channel, cross-node, alignment, adaptive-sampling, and resource-placement evaluations remain planned.
 
-## Evaluation status
+The evaluation separates `sensor_fault`, `shared_event`, and `localized_event` from network faults and device unavailability. Ground truth stays in `truth/episodes.csv`; only the offline analyzer joins it to `decision_label`. Required truth categories with no samples cause analysis failure rather than a misleading rate. Physical interventions and software injection are reported separately, and claims must link to manifests, truth, raw logs, and generated results.
 
-| Area | Status |
-|---|---|
-| Analysis framework correctness | **Verified on a fixture** whose answers were derived by counting (EXP-000) |
-| Cross-channel vs single-channel discrimination | **Evaluation planned** (EXP-003) |
-| Cross-node discrimination (Primary RQ) | **Evaluation planned** (EXP-005 / EXP-006) |
-| Trust-aware adaptive sampling (Secondary RQ) | **Evaluation planned** (EXP-007) |
-| Time alignment: offset / jitter / drift | **Evaluation planned** (EXP-004) |
-| Gateway-side vs backend-side cost and latency | **Evaluation planned** (EXP-008) |
-| Edge algorithm flash / RAM / latency | **Not measured** (the firmware build size is known; runtime resources are not) |
-| Energy | **Not measured**. v1 reports a **UART-time proxy** only (`(DATA bytes + ACK bytes) × 10 / 9600` s) — not airtime, not joules |
-| Link reliability | **Not measured under EdgeSense.** A single prior point-to-point run observed no packet loss over 600.985 s; that describes that run and nothing more |
+Runtime RAM, algorithm latency, power, energy, and link reliability have not been measured under EdgeSense. A known firmware image size is a build artifact, not a runtime resource measurement. The planned communication-cost proxy, `(DATA bytes + ACK bytes) × 10 / 9600` seconds, describes UART time, not RF airtime or energy. Prior measurements from related projects do not validate this implementation.
 
-## Running the checks
+## Quick start and reproduction
+
+No hardware is needed for the offline fixture. Use Python 3.13, as in the existing CI, and a C compiler for optional host checks. From the repository root:
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements-dev.txt
-.venv/bin/python scripts/check_all.py
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+python scripts/preflight.py
+python experiments/analyze_experiment.py --exp experiments/EXP-000
 ```
 
-`check_all.py` runs every check that needs no hardware — vendor integrity, config
-parity, host C tests, Python tests, the EXP-000 self-check and static checks — and
-reports one verdict per check. **A check that cannot run is reported as SKIP, never
-as PASS.**
+The analyzer writes deterministic reports to `experiments/EXP-000/results/analysis/`. These reproduce fixture calculations, not the planned research experiments.
 
-To build the firmware (verify the toolchain note in `docs/engineering/build.md`
-first):
+Optional checks matching the individual non-hardware CI steps:
 
 ```bash
-cd firmware/sensor_node && idf.py build
+python scripts/vendor_manifest.py --verify
+python scripts/check_config_parity.py
+bash scripts/test_host.sh
+python -m pytest
+python scripts/static_checks.py
 ```
 
-## Reading the documentation
+`scripts/check_all.py` is the full local sweep, including `--require-upstream` vendor verification. It requires upstream checkouts at the paths and pinned revisions recorded in the manifest; missing or advanced upstream versions fail the freeze check. Missing upstream comparisons are reported by the standalone verifier, and skipped checks must not be treated as passes. See [vendor provenance](docs/vendored/) and the [CI workflow](.github/workflows/checks.yml).
 
-| Document | What it is |
-|---|---|
-| `docs/PHASE_0_2_FINAL_DESIGN_FREEZE.md` | **The frozen design.** Authority for architecture, scope, taxonomy, experiments |
-| `docs/PHASE_0_DESIGN_REVIEW.md` | The original audit of the pre-existing projects |
-| `docs/PHASE_0_1_ARCHITECTURE_CORRECTION.md` | First correction round (layer placement, scope narrowing) |
-| `docs/engineering/design_decisions.md` | **Why** each decision was made, and what would reopen it |
-| `docs/engineering/architecture.md` | Layer → module map and per-layer testability conditions |
-| `docs/research/experiment_design.md` | Taxonomy, truth schema, pairing algorithm, metric gates |
-| `docs/hardware/wiring.md` | Single authoritative wiring source (status: `documented`, **not yet `verified`**) |
-| `docs/vendored/` | Provenance of every upstream component, with pinned hashes |
-
-**Conflict priority: Phase 0.2 ＞ Phase 0.1 ＞ Phase 0.**
-
-## Reproducing a claim
+To reproduce the recorded build, use an ESP-IDF v5.4.4 shell and the environment notes in the [build guide](docs/engineering/build.md):
 
 ```bash
-python3 scripts/preflight.py                 # what is missing on this machine
-python3 scripts/vendor_manifest.py --verify   # upstream code has not drifted
+cd firmware/sensor_node
+idf.py build
 ```
 
-Every number reported anywhere in this project must be traceable to an `experiments/EXP-xxx/` directory containing a `manifest.json`, a `truth/episodes.csv`, immutable raw logs, and machine-generated results. **Numbers are not typed by hand.**
+Verify the documented wiring before attempting a hardware run. The current entry point exercises sensing and codec round trips; it does not transmit over LoRa or compute trust/change scores.
 
-## Claims discipline
+## Relationship to Smart-Agriculture-Edge-AI
 
-- Ground truth lives only in `truth/episodes.csv`. **The running system does not know the experimental truth.**
-- Physical faults and software-injected faults are separate label axes and are reported separately.
-- A result observed once is written as an observation, never as a guarantee.
-- Negative and null results are reported. The primary hypothesis is allowed to fail.
-- No deployment or regulatory claim is made. These are laboratory results under the current hardware and configuration.
+[Smart-Agriculture-Edge-AI](https://github.com/Sver0411/Smart-Agriculture-Edge-AI) uses EdgeSense's verification ladder and manifest/truth/raw/results separation as design references, as recorded in its [integration report](https://github.com/Sver0411/Smart-Agriculture-Edge-AI/blob/main/docs/V0_3_INTEGRATION_REPORT.md). No EdgeSense business implementation or backend/diagnosis logic was copied into that system. EdgeSense remains an independent sensing-and-diagnosis study without an actuator-control path.
 
-## License
+## Limitations and next steps
 
-**No license has been chosen yet.** Absent a licence file, the default applies: all
-rights reserved, and nothing here is licensed for reuse.
+- Validate wiring and both sensor sets, then demonstrate the physical sensing and LoRa path before making hardware claims.
+- Implement channel context, gateway alignment/fusion, and trust-aware sampling; report negative results and shared-event recall tradeoffs alongside aggregate improvements.
+- Two co-located witnesses do not resolve all localized-event ambiguities. Multichannel agreement is also not proof of an environmental event: a shared I²C fault can affect several channels.
+- Gateway-side and backend-side decisions both follow LoRa reception; their placement comparison concerns serial uplink, processing, resources, and backend availability, not avoiding LoRa latency.
+- Field deployment, radio compliance, measured energy, mesh networking, multi-gateway failover, and actuators are outside the current evidence or v1 scope.
 
-This is deliberate rather than an oversight — picking a licence is the author's
-decision, and an earlier draft of this README referred to a `LICENSE` file that did
-not exist. If reuse is intended, add one (MIT and Apache-2.0 are the usual choices
-for a portfolio project); until then, treat the code as viewable, not reusable.
+## License and third-party rights
 
-Third-party code is unaffected by the above. The vendored files under
-`firmware/common/vendor/` remain under their own upstream licences, and each
-provenance record in `docs/vendored/` names its source and pinned commit.
+**No project license has been chosen.** The project is all rights reserved and is not licensed for reuse; no `LICENSE` file is present.
+
+Vendored files under `firmware/common/vendor/` remain subject to their upstream licences, notices, and usage restrictions. The [provenance records](docs/vendored/) identify sources, pinned versions, intended reuse, and boundaries; this README does not change those rights.
