@@ -66,7 +66,7 @@ Sensor C ─┤  B/C：规划使用相同固件，同房间相距 30–50 cm
 | 跨通道上下文 / 网关跨节点融合 | 已设计，未实现 | 实现、对齐测试与配对实验 |
 | Backend、Dashboard、AI Copilot | 已设计，未实现 | 工程实现与只读契约 |
 
-记录的固件构建使用 ESP-IDF v5.4.4。**编译成功不等于硬件验证。** 传感器可用性描述通道能否提供读数，不证明其可信度。硬件配置在 EdgeSense 中仅有文档记录，尚未核验；第二套 SHT30 + BH1750 仍是双节点实验的记录前提。详见[构建证据](docs/engineering/build.md)、[接线与硬件前提](docs/hardware/wiring.md)和 [Phase 1A 报告](OVERNIGHT_BUILD_REPORT.md)。
+固件基于 ESP-IDF v5.4.4 构建，双节点实验需配备第二套 SHT30 + BH1750 传感器。详见[构建证据](docs/engineering/build.md)、[接线与硬件前提](docs/hardware/wiring.md)和 [Phase 1A 报告](docs/engineering/phase1a_report.md)。
 
 ## 评估状态与边界
 

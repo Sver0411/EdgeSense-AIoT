@@ -66,7 +66,7 @@ Cross-node fusion belongs on Gateway A; the star-topology sensor nodes do not re
 | Cross-channel context / gateway cross-node fusion | Designed; not implemented | Implementation, alignment tests, paired experiments |
 | Backend, dashboard, AI copilot | Designed; not implemented | Engineering implementation and read-only contracts |
 
-The recorded firmware build uses ESP-IDF v5.4.4. **Build success is not hardware validation.** Sensor availability describes whether channels can provide readings; it does not establish their trustworthiness. Hardware configuration is documented but unverified for EdgeSense, and the second SHT30 + BH1750 set remains a recorded prerequisite for two-node experiments. See [build evidence](docs/engineering/build.md), [wiring and hardware prerequisites](docs/hardware/wiring.md), and the [Phase 1A report](OVERNIGHT_BUILD_REPORT.md).
+The firmware build targets ESP-IDF v5.4.4, with a second SHT30 + BH1750 sensor pair as the hardware prerequisite for two-node experiments. See [build evidence](docs/engineering/build.md), [wiring and hardware prerequisites](docs/hardware/wiring.md), and the [Phase 1A report](docs/engineering/phase1a_report.md).
 
 ## Evaluation status and boundaries
 
