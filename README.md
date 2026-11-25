@@ -1,5 +1,9 @@
 <h1 align="center">EdgeSense-AIoT</h1>
 
+> [!NOTE]
+> **Repository Status & Evolution:** `EdgeSense-AIoT` is an early end-to-end ESP32-S3 + LoRa prototype exploring fault-aware adaptive sensing. Its core mechanisms have since been decoupled into focused, independently verified repositories: **L1** [SensorTrust](https://github.com/Sver0411/SensorTrust) (C11 health engine), **L2** [TAIS](https://github.com/Sver0411/TAIS) (closed-loop scheduling & boundary analysis), **L3** [EventGuard-LoRa](https://github.com/Sver0411/EventGuard-LoRa) (Sub-GHz redundancy), and **L4** [Smart-Agriculture-Edge-AI](https://github.com/Sver0411/Smart-Agriculture-Edge-AI) (multi-node deployment).
+
+
 <p align="center"><strong>Fault-Aware Adaptive Sensing and IoT Diagnosis Research</strong></p>
 
 <p align="center">Sensor Trust · Cross-Node Evidence · Reproducible Experiments</p>
@@ -128,3 +132,12 @@ Verify the documented wiring before attempting a hardware run. The current entry
 **No project license has been chosen.** The project is all rights reserved and is not licensed for reuse; no `LICENSE` file is present.
 
 Vendored files under `firmware/common/vendor/` remain subject to their upstream licences, notices, and usage restrictions. The [provenance records](docs/vendored/) identify sources, pinned versions, intended reuse, and boundaries; this README does not change those rights.
+
+## Part of the 4-Layer AIoT Research Stack
+
+`EdgeSense-AIoT` belongs to **L2/L4 · Early Integrated Prototype** of a reproducible AIoT systems stack:
+
+- **L1 · Reliable Sensing:** [SensorTrust](https://github.com/Sver0411/SensorTrust) (C11 zero-allocation sensor health monitoring)
+- **L2 · Adaptive Observation:** [AdaptiveSense](https://github.com/Sver0411/AdaptiveSense) · [TAIS](https://github.com/Sver0411/TAIS) (closed-loop trust-aware scheduling & boundary analysis)
+- **L3 · Freshness & Lossy Links:** [EventGuard-LoRa](https://github.com/Sver0411/EventGuard-LoRa) · [NetAdapt-IoT](https://github.com/Sver0411/NetAdapt-IoT) · [IoT-MPQUIC-Scheduler](https://github.com/Sver0411/IoT-MPQUIC-Scheduler)
+- **L4 · Resilience & CPS Validation:** [EdgeFaultLab](https://github.com/Sver0411/EdgeFaultLab) · [TinyEdgeBench](https://github.com/Sver0411/TinyEdgeBench) · [Smart-Agriculture-Edge-AI](https://github.com/Sver0411/Smart-Agriculture-Edge-AI) · [AgriTwin-CPS](https://github.com/Sver0411/AgriTwin-CPS)
